@@ -1,0 +1,75 @@
+.form-floating{
+    position: relative;
+}
+
+.icon{
+    position: absolute;
+    top: calc(63%);
+    left: 1.40rem;
+    color: gray;
+}
+
+.form-control{
+    left: .5rem;
+    padding-left: 2rem;
+}
+
+
+.input-error{
+    left: 20rem;
+    position: absolute;
+    color: red; 
+}
+
+.input-ok{
+    left: 20rem;
+    position: absolute;
+    color: green; 
+}
+
+
+
+
+.card-header{
+    color: black;
+    font-size: 150% ;
+}
+
+.texto-error{
+    position: absolute;
+}
+
+.btn-danger{
+    position: absolute;
+    top: calc(46%);
+    left: 1rem;
+}
+
+
+.resultado {
+    left: 20rem;
+    top: calc(65%);
+    position: absolute;
+    color: red; 
+    
+}
+.resultado.ok {
+    left: 20rem;
+    position: absolute;
+    top: calc(65%);
+    color: green; 
+}
+
+.resultadoRfc {
+    left: 20rem;
+    top: calc(65%);
+    position: absolute;
+    color: red; 
+}
+.resultadoRfc.ok {
+    left: 20rem;
+    position: absolute;
+    top: calc(65%);
+    color: green;
+}
+
