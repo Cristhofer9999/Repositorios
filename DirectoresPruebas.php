@@ -19,16 +19,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">     
     <!-- Bootstrap trabaja sin internet -->
     <!-- <link href="ccs /bootstrap.min.ccs" rel="stylesheet" /> -->
-    
+
+
+    <!-- Jquery -->
+    <script src = "./jquery/jquery-3.6.4.min.js"></script>
+
     <!--Estilos  -->
     <link rel="stylesheet" href="./css/iconos.css">
     
     <!--Iconos -->
     <script src="https://kit.fontawesome.com/6c14e3a650.js" crossorigin="anonymous"></script>
     
-    <!--Codigo de validacion-->
+    <!--Codigos de validacion-->
     <script src="./js/codigo.js"></script>
-
+    <script src="./js/json.js"></script>
     
 
 
@@ -201,7 +205,7 @@
                                 <fieldset>
                                     
                                          <label for="curpInput" class="form-label">C.U.R.P</label>
-                                        <input id="inputCurp" name"curp" value="<?php echo $mostrar['curp'] ?>" type="text" class="form-control" 
+                                        <input id="inputCurp" name="curp" value="<?php echo $mostrar['curp'] ?>" type="text" class="form-control" 
                                             placeholder="Ingresar CURP" aria-label="Recipient's username" 
                                             aria-describedby="button-addon2" onkeyup="this.value=this.value.toUpperCase()" 
                                             oninput="validarInput(this)"  maxlength="18" minlength="18" onkeypress="return validarInput(event)"  
@@ -220,14 +224,14 @@
                                     
                                 
                                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
-                                        <button type="submit" class="btn btn-danger">Validar C.U.R.P</button>
+                                        <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button>
                                     </div>
                                </fieldset>
 
                             <!--Peticion de RFC-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                 <i class="icon fa-solid fa-id-badge fa-md"></i>
-                                <label for="rfcInput" class="form-label">R.F.C</label>   
+                                <label id="Prueba_RFC" for="rfcInput" class="form-label">R.F.C</label>   
 
                                 <input type ="text" name="rfc" class = "form-control" value="<?php echo $mostrar['rfc'] ?>" id="rfcInput" placeholder="Ingresar RFC" 
                                  onkeyup="this.value=this.value.toUpperCase()" 
@@ -291,7 +295,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                 <i class="icon fa-solid fa-location-dot fa-md"></i>
                                 <label for="entidadInput"  class="form-label">Entidad de Nacimiento</label>   
-                                <input type ="text" name="entidad" class = "form-control" value="<?php echo $mostrar['lugar_nacimiento'] ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" >
+                                <input type ="text" name="entidad" class = "form-control" value="<?php echo $mostrar['lugar_nacimiento'] ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly >
                             </div>
 
                             <!--Espaciado Horizontal-->
@@ -334,9 +338,8 @@
                             <!--Peticion telefono de celular-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                 <i class="icon fa-solid fa-phone fa-md"></i>
-                                <label for="celInput" name="telefono_cel" class="form-label">Telefono Celular</label>   
-                                <input type ="tel" class = "form-control" value="<?php echo $mostrar['telefono_celular']?>" id="celInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10"  required>
-                                
+                                <label for="celInput" class="form-label">Telefono Celular</label>   
+                                <input type ="tel" name="telefono_cel" class ="form-control" value="<?php echo $mostrar['telefono_celular']?>" id="celInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10"  required>
                                 <div class="valid-tooltip">
                                     CAMPO OK.
                                   </div>

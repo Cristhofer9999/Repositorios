@@ -34,7 +34,7 @@
     }
 
         
-    //Validacion Solo Letras
+//Validacion Solo Letras
     function soloLetras(e)
     {
         key=e.keyCode || e.witch;
@@ -53,8 +53,7 @@
     }
 
 
-
-    //Función para validar una CURP
+//Función para validar una CURP
 function curpValida(curp) {
     var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
         validado = curp.match(re);
@@ -80,6 +79,7 @@ function curpValida(curp) {
         
     return true; //Validado
 }
+
 //Handler para el evento cuando cambia el input
 //Lleva la CURP a mayúsculas para validarlo
 function validarInput(input) {
@@ -96,6 +96,7 @@ function validarInput(input) {
     } 
     resultado.innerText = "\nFormato de CURP: " + valido;
 }
+
 //Copiar los primeros 10 digitos de la Curp en el input del RFC
 function enviarTexto()
 {
@@ -124,7 +125,14 @@ function enviarTexto()
   document.getElementById("rfcInput").value="Error en el curp";
   }
 } */
+$(function(){
+     
+    $("#boton").click(function(){
 
+           $("#Prueba_RFC").hide();
+    })
+
+})
 
 
 
