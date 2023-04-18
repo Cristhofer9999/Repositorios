@@ -5,12 +5,22 @@
  const expresiones = {
    curp: /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
    rfc: /^[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}$/i,
+   
    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
    telefono: /^\d{7,14}$/ // 7 a 14 numeros.
  }
    
    
-   
+ function valida_cct(){
+    let cct=/^[0-9]{2}[A-Za-z]{3}[0-9]{4}[A-Za-z]{1}$/;
+    let js_clave=document.getElementById("clave").value.trim();
+    if (!cct.test(js_clave)){
+        alert('Clave invalida ejemplo:05DPR1234F');
+        return false;
+    }
+ }  
+
+
    //$(function() {
     //    $('#datepicker').datepicker();
     //});
