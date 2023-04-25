@@ -10,11 +10,12 @@
    
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambio de director</title>
@@ -24,47 +25,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">     
     <!-- Bootstrap trabaja sin internet -->
     <!-- <link href="ccs /bootstrap.min.ccs" rel="stylesheet" /> -->
-    
+
+
+    <!-- Jquery -->
+    <script src = "./jquery/jquery-3.6.4.min.js"></script>
+
     <!--Estilos  -->
     <link rel="stylesheet" href="./css/iconos.css">
     
     <!--Iconos -->
     <script src="https://kit.fontawesome.com/6c14e3a650.js" crossorigin="anonymous"></script>
     
-    <!--Codigo de validacion-->
+    <!--Codigos de validacion-->
     <script src="./js/codigo.js"></script>
-
+    <!---<script src="./js/json.js"></script>-->
     
-
 
 </head>
-<body>
-    
-
-    <div style="height: 10px;"></div>
-    <!--Encabezado de la pagina-->
-    <h1 class="display-4 text-center">Datos del director del centro educativo</h1> 
-
-   
-    
-    <div class="shadow p-3 mb-5 bg-white rounded">
-    <!--Container-->    
-        <div class="container my-3">
-
-            
-            
-            <!--Clase row que se puede dividir en 12 segmentos-->
+    <body>
             
 
-             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6">  
-         
-               
+                <form style=" margin-left : 10vw; margin-right : 10vw;" id="formulario" class="row needs-validation" action="Guardar.php" method="POST" novalidate>
             
-             <form id="formulario" class="row needs-validation" novalidate> 
+                
+                    <div class="shadow p-6 mb-15 bg-white rounded">
+                    <!--Container-->    
+                        <div class="container my-3"> 
 
-             
+                                <div style="height: 10px;"></div>
+                                <!--Encabezado de la pagina-->
+                                    <h1 class="display-4 text-center">Datos del director del centro educativo</h1> 
 
-             <?php               
+
+                                            <?php               
                                             $datosCentro=
                                             "SELECT 
                                             cct, nombre, turno, desc_status, nombre_de_localidad, asentamiento, nombre_vialidad_principal,
@@ -119,12 +112,13 @@
                                             <?php 
                                                         }
                                                 ?> 
-                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" > 
-                            <div class="card-header my-2 text-center">CAPTURA DE DATOS</div>
-                             <div style="height: 10px;"></div>   
-                            </div>                 
-                            
-                            <?php               
+
+                                                    <!--Clase row que se puede dividir en 12 segmentos-->
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6">
+                                                        
+                                                            <div class="card-header my-2 text-center">CAPTURA DE DATOS</div>
+        
+                                                                    <?php               
                                                                     $sql3="SELECT * FROM director WHERE cve_centro='$cct'";
                                                                     $result=mysqli_query($obj->db_conn,$sql3);
                                                             
@@ -167,10 +161,8 @@
                                                                                </div> 
                                                                             </div>
                                                                                    
-                                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> </div>
                                                                                     <!--Peticion de curp-->
-                                                                                   
-
+                                    
                                                                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> 
 
                                                                                                 
@@ -193,7 +185,7 @@
                                                                                                     
                                                                                             </div>
                                                                                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
-                                                                                                                <button id="boton_validar_curp" type="button" onsubmit="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button>
+                                                                                                                <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button>
                                                                                                             </div>
                                                                                                
 
@@ -367,15 +359,17 @@
                                                             <?php 
                                                             }
                                                         ?> 
-
-            </form>      
-           
-        </div>
-    </div>
-
-
-
-
+                      
+                        </div>   
+                    </div>      
+                    
+                    </div>    
+  
+                </form>      
+                   
+                
+             
+             
 
     <!--Scrip de validacion de campos con Bootstrap-->
     <script>

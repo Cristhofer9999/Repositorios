@@ -32,8 +32,7 @@
     <!--Encabezado de la pagina-->
     <h1 class="display-4 text-center">Datos del director del centro educativo</h1> 
 
-    
-    
+   
     
     <div class="shadow p-3 mb-5 bg-white rounded">
     <!--Container-->    
@@ -83,11 +82,11 @@
             <!--Clase row que se puede dividir en 12 segmentos-->
             
 
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6"> 
+             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6">  
 
                
             
-            <form id="formulario" class="row needs-validation" novalidate> 
+             <form id="formulario" class="row needs-validation" novalidate> 
 
                             <!--Captura de Tipo de director-->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6" > 
@@ -313,10 +312,15 @@
                                 <!--Boton de Cancelar-->
                                 <button  type="button" class="btn btn-secondary">Cancelar</button>
                             </div>
+
             </form>      
            
         </div>
     </div>
+
+
+
+
 
     <!--Scrip de validacion de campos con Bootstrap-->
     <script>

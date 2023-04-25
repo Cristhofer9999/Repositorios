@@ -35,7 +35,7 @@ if (class_exists("class_db")!=true){
 				}
 				else{
 					
-					echo "Si se conecto ";
+					//echo "Si se conecto ";
 
 				}
 
