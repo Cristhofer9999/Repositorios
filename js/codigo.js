@@ -16,25 +16,47 @@
     let js_clave=document.getElementById("clave").value.trim();
     if (!cct.test(js_clave)){
         alert('Clave invalida ejemplo:05DPR1234F');
-        return false;
+        //return false;
     }
  }  
 
- function valida_curp(){
-    let curp=/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/;
-    let js_curp=document.getElementById("curp").value.trim();
-    if (!curp.test(js_curp)){
-        alert('Clave invalida ejemplo:ABCD010203HNLNLRO6');
-        return false;
+
+ //
+ function validarCurpBoton() {
+    // La CURP debe tener 18 caracteres
+    //let validado=document.getElementById("inputCurp").value.trim(); 
+    let curp=document.getElementById("inputCurp").value.trim();
+    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+    validado = curp.match(re);
+	
+    if (!validado) { //Coincide con el formato general?
+    alert('CURP NO VALIDA, EXISTE UN ERROR EN TU CURP');
+    	return false;}
+    
+    //Validar que coincida el dígito verificador
+    function digitoVerificadorT(curp17) {
+        //Fuente https://consultas.curp.gob.mx/CurpSP/
+        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
+            lngSuma      = 0.0,
+            lngDigito    = 0.0;
+        for(var i=0; i<17; i++)
+            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
+        lngDigito = 10 - lngSuma % 10;
+        if (lngDigito == 10) return 0;
+        return lngDigito;
     }
- }  
+  
+    if (validado[2] != digitoVerificadorT(validado[1])) {
+    alert('CURP NO VALIDA, EXISTE UN ERROR EN TU CURP');
+    	return false;}
+    
+    alert('CURP VALIDA');    
+    return true; //Validado
+ }
+ //
  
 
 
-
-   //$(function() {
-    //    $('#datepicker').datepicker();
-    //});
 
     //Validacion Solo Numeros
     function soloNumero(e)
@@ -51,6 +73,7 @@
         }
         if(numero.indexOf(teclado)==-1 && !teclado_especial){
                return false;
+               
         }
     }
 
@@ -78,10 +101,10 @@
 function curpValida(curp) {
     var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
         validado = curp.match(re);
-	
     if (!validado)  //Coincide con el formato general?
     	return false;
-    
+        
+         
     //Validar que coincida el dígito verificador
     function digitoVerificador(curp17) {
         //Fuente https://consultas.curp.gob.mx/CurpSP/
@@ -96,7 +119,7 @@ function curpValida(curp) {
     }
   
     if (validado[2] != digitoVerificador(validado[1])) 
-    	return false;
+    	return false//
         
     return true; //Validado
 }
@@ -118,6 +141,7 @@ function validarInput(input) {
     resultado.innerText = "\nFormato de CURP: " + valido;
 }
 
+
 //Copiar los primeros 10 digitos de la Curp en el input del RFC
 function enviarTexto()
 {
@@ -134,18 +158,8 @@ function enviarTexto()
  }
 }
 
-//Copiar los primeros 10 digitos de la Curp en el input del RFC
-/* function enviarTexto()
-{
- var texto=document.getElementById("inputCurp").value;
 
- if(validarInput.valido = "No válido"){
- document.getElementById("rfcInput").value=texto[0]+texto[1]+texto[2]+texto[3]+texto[4]+texto[5]+texto[6]+texto[7]+texto[8]+texto[9];
-  }
-  else{
-  document.getElementById("rfcInput").value="Error en el curp";
-  }
-} */
+
 $(function(){
      
     $("#boton").click(function(){

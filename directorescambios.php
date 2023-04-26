@@ -43,7 +43,7 @@
 
     <div style="height: 10px;"></div>
     <!--Encabezado de la pagina-->
-    <h1 class="display-4 text-center">Datos del director del centro educativo</h1> 
+    <h1 class="display-4 text-center">DATOS DEL CENTRO EDUCATIVO</h1> 
 
    
     
@@ -56,11 +56,11 @@
             <!--Clase row que se puede dividir en 12 segmentos-->
             
 
-             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6">  
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 my-6 col-md-6">  
          
                
             
-             <form id="formulario" class="row needs-validation" novalidate> 
+            <form id="formulario" class="row needs-validation" novalidate> 
 
              
 
@@ -119,86 +119,89 @@
                                             <?php 
                                                         }
                                                 ?> 
+
+
                              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" > 
                             <div class="card-header my-2 text-center">CAPTURA DE DATOS</div>
                              <div style="height: 10px;"></div>   
-                            </div>                 
+                            </div>             
+                            
+                            
+
                             
                             <?php               
-                                                                    $sql3="SELECT * FROM director WHERE cve_centro='$cct'";
-                                                                    $result=mysqli_query($obj->db_conn,$sql3);
+                                $sql3="SELECT * FROM director WHERE cve_centro='$cct'";
+                                $result=mysqli_query($obj->db_conn,$sql3);
                                                             
-                                                                    while($mostrar=mysqli_fetch_array($result)){
+                                 while($mostrar=mysqli_fetch_array($result)){
                                                                         
-                                                                    ?>
-                                                                        <!--Captura de Tipo de director-->
-                                                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-6" > 
-                                                                        
-                                                                            <label for="tipoDirector">Tipo de director</label> 
-                                                                            <div class="input-group">
-                                                                                    <select class="custom-select" id="directorInput" name="tipoDirector" aria-label="Example select with button addon">
+                                 ?>
+                                    <!--Captura de Tipo de director-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-6" >     
+                                    <label for="tipoDirector">Tipo de director</label> 
+                                    <div class="input-group">
+                                    <select class="custom-select" id="directorInput" name="tipoDirector" aria-label="Example select with button addon">
                                                                                         
-                                                                                            <option value="0">
-                                                                                                <?php 
-                                                                                                echo $mostrar['cve_tipo_director'];
-                                                                                                ?> 
-                                                                                            </option>
+                                    <option value="0"> <?php  echo $mostrar['cve_tipo_director']; ?> </option>
 
-                                                                                    
-                                                                                            <option value="1"> 
-                                                                                                <?php 
-                                                                                                $tipo_dir = $mostrar['cve_tipo_director'];
-                                                                                                if( $tipo_dir = 1){
-                                                                                                echo 2;}
-                                                                                                else if( $tipo_dir != 1){
-                                                                                                echo 1;   
-                                                                                                }
-                                                                                                ?>  
-                                                                                            </option>
+                                    <option value="1"> 
+                                            <?php 
+                                            $tipo_dir = $mostrar['cve_tipo_director'];
+                                            if( $tipo_dir = 1){
+                                            echo 2;}
+                                            else if( $tipo_dir != 1){
+                                            echo 1;   
+                                            }
+                                            ?>  
+                                    </option>
 
-                                                                                        <!--<option value="1">Encargado</option> -->
-                                                                                        <!-- <option value="2">Titular</option> -->
-                                                                                    </select>
-                                                                                            <div class="input-group-append">
-                                                                                            <button class="btn btn-outline-secondary" type="submit">X</button>
-                                                                                            </div> 
+                                    <!--<option value="1">Encargado</option> -->
+                                    <!-- <option value="2">Titular</option> -->
+                                    </select>
+                                    <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">X</button>
+                                    </div> 
                     
                                                                                              
-                                                                               </div> 
-                                                                            </div>
-                                                                                   
-                                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> </div>
-                                                                                    <!--Peticion de curp-->
-                                                                                   
+                                    </div> 
+                                </div>
 
-                                                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> 
+                                    <!--Espaciado Horizontal-->                                               
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> </div>
+                                                                                   
+                                    <!--Peticion de curp-->
+                                                                                   
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> 
 
-                                                                                                
+                                    <label for="curpInput" class="form-label">C.U.R.P</label>
+                                    <input id="inputCurp" name="curp" value="<?php echo $mostrar['curp'] ?>" type="text" class="form-control" 
+                                     placeholder="Ingresar CURP" aria-label="Recipient's username" 
+                                     aria-describedby="button-addon2" onkeyup="this.value=this.value.toUpperCase()" 
+                                     oninput="validarInput(this)"  maxlength="18" minlength="18" onkeypress="return validarInput(event)"  
+                                     pattern="^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$" required>
+                                    <i class="icon fa-solid fa-cube fa-md"></i>   
                                                                                                     
-                                                                                                        <label for="curpInput" class="form-label">C.U.R.P</label>
-                                                                                                        <input id="inputCurp" name="curp" value="<?php echo $mostrar['curp'] ?>" type="text" class="form-control" 
-                                                                                                            placeholder="Ingresar CURP" aria-label="Recipient's username" 
-                                                                                                            aria-describedby="button-addon2" onkeyup="this.value=this.value.toUpperCase()" 
-                                                                                                            oninput="validarInput(this)"  maxlength="18" minlength="18" onkeypress="return validarInput(event)"  
-                                                                                                            pattern="^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$" required>
-                                                                                                        <i class="icon fa-solid fa-cube fa-md"></i>   
-                                                                                                    
-                                                                                                        <p class="resultado" id="resultado"></pclass> </p>
-                                                                                                            <div class="valid-tooltip my-6">
-                                                                                                                Curp listo para validacion.
-                                                                                                            </div>
-                                                                                                            <div class="invalid-tooltip my-6">
-                                                                                                                Favor de llenar este campo de manera correcta.
-                                                                                                            </div>
-                                                                                                    
-                                                                                            </div>
-                                                                                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
-                                                                                                                <button id="boton_validar_curp" type="button" onsubmit="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button>
-                                                                                                            </div>
+                                    <p class="resultado" id="resultado"></pclass> </p>
+                                              
+                                    <!--Validacion mostrando tooltips-->
+                                    <div class="valid-tooltip my-6">
+                                     Curp listo para validacion.
+                                    </div>
+
+                                    <div class="invalid-tooltip my-6">
+                                    Favor de llenar este campo de manera correcta.
+                                    </div>
+                                                
+                                    
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
+                                    <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
+                                    <button id="boton_validar_curp" type="button" onclick="return validarCurpBoton();" class="btn btn-danger">Validar C.U.R.P</button> 
+                                </div>
                                                                                                
 
                                     <!--Peticion de RFC-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-2"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-2"> 
                                         <i class="icon fa-solid fa-id-badge fa-md"></i>
                                         <label id="Prueba_RFC" for="rfcInput" class="form-label">R.F.C</label>   
 
@@ -214,77 +217,77 @@
                                             Agrega los ultimos 3 digitos de tu R.F.C y/o valida tu curp.
                                         </div>
                                         <i class="icon fa-solid fa-id-badge fa-md"></i>
-                                    </div>
+                                </div>
                                 
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
 
                                     
                                     <!--Lectura de nombre-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="nombreInput"  class="form-label">Nombre</label>   
                                         <input type ="text" name="nombre" value="<?php echo $mostrar['nombre'] ?>" class = "form-control" id="nombreInput" placeholder="Nombre" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly > 
-                                    </div>
+                                </div>
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
                                     
                                     
                                     
                                     <!--Lectura de paterno-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="paternoInput"  class="form-label">Apellido Paterno</label>   
                                         <input type ="text" name="paterno" class = "form-control" value="<?php echo $mostrar['apellido_paterno'] ?>" id="paternoInput" placeholder="Apellido Paterno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
-                                    </div>
+                                </div>
                                     
                                     <!--Lectura de materno-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="maternoInput"  class="form-label">Apellido Materno</label>   
                                         <input type ="text" name="materno" class = "form-control" value="<?php echo $mostrar['apellido_materno'] ?>" id="maternoInput" placeholder="Apellido Materno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
-                                    </div>
+                                </div>
                                     
 
 
 
                                     <!--Lectura de fecha-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-calendar-days fa-md"></i>
                                         <label for="fecha"  class="col-form-label">Fecha de Nacimiento</label>
                                         <div class="date" id="datepicker">
                                         <input type="date" name="fecha" class="form-control" value="<?php echo $mostrar['fecha_nacimiento'] ?>" readonly >
                                         </div>
-                                    </div>
+                                 </div>
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
                                 
                                     <!--Lectura de entidad-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-location-dot fa-md"></i>
                                         <label for="entidadInput"  class="form-label">Entidad de Nacimiento</label>   
                                         <input type ="text" name="entidad" class = "form-control" value="<?php echo $mostrar['lugar_nacimiento'] ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly >
-                                    </div>
+                                </div>
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">  </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">  </div>
                                     
                                     <!--Lectura de sexo-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="sexoInput"  class="form-label">Sexo</label>   
                                         <input type ="text" name="sexo" class = "form-control" value="<?php echo $mostrar['sexo'] ?>" id="sexoInput" placeholder="Sexo" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
-                                    </div>   
+                                </div>   
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> </div>
                                     
                                      
                                     <!--Peticion telefono de oficina-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telOfiInput"  class="form-label">Telefono de Oficina</label>   
                                         <input type ="tel" name="telefono_ofi" class = "form-control" value="<?php echo $mostrar['telefono_oficina'] ?>" id="telOfiInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
@@ -292,22 +295,22 @@
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
-                                    </div>
+                                </div>
 
                                     <!--Peticion telefono de personal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telPersoInput"  class="form-label">Telefono Personal</label>   
                                         <input type ="tel" name="telefono_perso" class = "form-control"  value="<?php echo $mostrar['telefono_particular']?>" id="telPersoInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
-                                    </div>
+                                </div>
                                     
                                     
                                     
                                     <!--Peticion telefono de celular-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="celInput" class="form-label">Telefono Celular</label>   
                                         <input type ="tel" name="telefono_cel" class ="form-control" value="<?php echo $mostrar['telefono_celular']?>" id="celInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10"  required>
@@ -317,11 +320,11 @@
                                         <div class="invalid-tooltip">
                                             Favor de llenar este campo y/o introducir un numero valido.
                                         </div>
-                                    </div>
+                                </div>
 
 
                                     <!--Peticion de correo personal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
                                         <input id="correo" type ="text" name="correo" value="<?php echo $mostrar['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
@@ -332,12 +335,12 @@
                                         <div id="correoInvalid" class="invalid-tooltip">
                                             Favor de llenar este campo de manera correcta.
                                         </div>
-                                    </div>
+                                </div>
                                                                                                        
 
 
                                     <!--Peticion telefono de correo institucional-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
                                         <i class="icon fa-solid fa-envelope fa-md"></i> 
                                         <label for="correoInsituInput"  class="form-label">Correo Institucional (Escuela)</label >   
                                         <input type ="email" name="correo_insti" class = "form-control" value="<?php echo $mostrar['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
@@ -347,22 +350,23 @@
                                         <div class="invalid-tooltip">
                                             Favor de llenar este campo de manera correcta.
                                         </div>
-                                    </div>
+                                </div>
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"></div>
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"></div>
                                     
-                                    <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $mostrar['cve_centro']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
+                                        <!-- Imput Oculto de clave de centro -->
+                                        <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $mostrar['cve_centro']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
 
                                     <!--Espaciado Horizontal-->
-                                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9"> </div>
+                                <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9"> </div>
 
                                     <!--Boton de Actualizar-->
-                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3"> 
+                                <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3"> 
                                         <input id="btnEnviar" class="btn btn-warning" type="submit" value="Actualizar">
                                         <!--Boton de Cancelar-->
                                         <button  type="button" class="btn btn-secondary">Cancelar</button>
-                                    </div>
+                                </div>
 
                                                             <?php 
                                                             }
