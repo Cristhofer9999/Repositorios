@@ -171,7 +171,7 @@
                                                                                    
                                     <!--Peticion de curp-->
                                                                                    
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> 
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 col-md-3 my-4"> 
 
                                     <label for="curpInput" class="form-label">C.U.R.P</label>
                                     <input id="inputCurp" name="curp" value="<?php echo $mostrar['curp'] ?>" type="text" class="form-control" 
@@ -194,7 +194,7 @@
                                                 
                                     
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
                                     <button id="boton_validar_curp" type="button" onclick="return validarCurpBoton();" class="btn btn-danger">Validar C.U.R.P</button> 
                                 </div>
