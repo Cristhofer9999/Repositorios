@@ -1,4 +1,4 @@
-//Obtencion de la clave con la que se va a trabajar
+
 <?php
 	$cct=$_SESSION['cve_usuario']=strtoupper($_POST['clave']);
 
