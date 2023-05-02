@@ -1,13 +1,11 @@
+//Obtencion de la clave con la que se va a trabajar
 <?php
 	$cct=$_SESSION['cve_usuario']=strtoupper($_POST['clave']);
-
-
 
     #$mysqli->set_charset("utf8");
     include('Conexion_POO.php');
     $obj=new class_db(); 
-    
-   
+       
 ?>
 
 
@@ -137,7 +135,7 @@
                                                                         
                                  ?>
                                     <!--Captura de Tipo de director-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-md-6" >     
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6" >     
                                     <label for="tipoDirector">Tipo de director</label> 
                                     <div class="input-group">
                                     <select class="custom-select" id="directorInput" name="tipoDirector" aria-label="Example select with button addon">
