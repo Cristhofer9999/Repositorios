@@ -363,7 +363,7 @@
                                 <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3"> 
                                         <input id="btnEnviar" class="btn btn-warning" type="submit" value="Actualizar">
                                         <!--Boton de Cancelar-->
-                                        <button  type="button" class="btn btn-secondary">Cancelar</button>
+                                        <button  type="button" onclick="location.reload()" class="btn btn-secondary" >Cancelar</button>
                                 </div>
 
                                                             <?php 
