@@ -10,7 +10,7 @@ $(function(){
       return false;
   }
 
-  alert('El email introducido es correcto.');
+  alert('El email introducido es correcto ¡Felicidades!.');
     //alert("Hola");
   });
 
