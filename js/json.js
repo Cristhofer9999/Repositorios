@@ -10,17 +10,44 @@ $(function(){
        
       alert("HOLA");
            
-      $.ajax({
-        url:"consulta_curp.php",
-        data:  Curp,
-        type: JSON,
-        method: POST
-      })
-      succes(data){
-        if data.procede ==1(
+      // $.ajax({
+      //   url:"consulta_curp.php",
+      //   data:  Curp,
+      //   type: JSON,
+      //   method: POST
+      // })
+      // succes(data){
+      //   if data.procede == 1(
           
-        )
-      }
+      //   )
+      // }
+
+      $.ajax({
+        type: 'post',
+        url: 'consulta_curp.php',
+        data: Curp,
+        dataType: 'json',
+        succes: function(response)
+        {
+          var jsonData = JSON.stringify(response);
+          var obj =$.parseJSON(jsonData);
+
+          $('#curp').val(obj.curp);
+          $('#nombre').val(obj.nombre);
+          $('#paterno').val(obj.paterno);
+          $('#materno').val(obj.materno);
+          $('#fechaNac').val(obj.fechaNac);
+          $('#nombre_estado').val(obj.nombre_estado);
+          $('#sexo').val(obj.sexo);
+
+          // if(jsonData.procede == 1){
+          //   location.href = 'consulta_curp.php';
+          // }
+          // else{
+          //   alert("CURP no encontrada")
+          // }
+        }
+      })
            
       
       $("#Prueba_RFC").css({"color": "red"});
