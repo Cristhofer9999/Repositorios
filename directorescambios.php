@@ -33,7 +33,9 @@
     <script src="./js/codigo.js"></script>
     <!-- Cambios -->
     <!-- Cambios -->
-
+    <!--Codigo de validacion-->
+    
+    
 
 </head>
 <body>
@@ -146,18 +148,24 @@
                                             <?php 
                                             $tipo_dir = $mostrar['cve_tipo_director'];
                                             if( $tipo_dir = 1){
-                                            echo 2;}
-                                            else if( $tipo_dir != 1){
-                                            echo 1;   
+                                            $tipo_dir = 2;
+                                            echo $tipo_dir;
+                                        }
+                                            else if( $tipo_dir = 2){
+                                             $tipo_dir = 2;
+                                            echo $tipo_dir;  
                                             }
                                             ?>  
                                     </option>
+
+
+
 
                                     <!--<option value="1">Encargado</option> -->
                                     <!-- <option value="2">Titular</option> -->
                                     </select>
                                     <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit">X</button>
+                                    <button class="btn btn-outline-secondary" type="button">X</button>
                                     </div> 
                     
                                                                                              
@@ -196,6 +204,7 @@
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
                                     <button id="boton_validar_curp" type="button" onclick="return validarCurpBoton();" class="btn btn-danger">Validar C.U.R.P</button> 
                                 </div>
+
                                                                                                
 
                                     <!--Peticion de RFC-->
@@ -407,6 +416,9 @@
     src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
     crossorigin="anonymous"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+    <script src="./js/json.js"></script>
 
 
 </body>

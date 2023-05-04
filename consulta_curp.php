@@ -1,6 +1,14 @@
 <?php
 
-    $curp = "COSF740224HNLNLR06";
+$cct=$_SESSION['curp']=strtoupper($_POST['curp']);
+
+#$mysqli->set_charset("utf8");
+include('Conexion_POO.php');
+$obj=new class_db(); 
+   
+
+    //$curp = "COSF740224HNLNLR06";
+
     $datos = json_decode(file_get_contents("https://servicios.southcentralus.cloudapp.azure.com/wservice/padres/w_service_buscar_curp.php?curp=$curp"), true);
     print_r($datos);
 

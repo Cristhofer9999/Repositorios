@@ -1,5 +1,6 @@
  const formulario = document.getElementById('formulario');
  const inputs = document.querySelectorAll('#formulario');
+
  
    
  const expresiones = {
@@ -22,7 +23,7 @@
 
 
  //
- function validarCurpBoton() {
+ function validarCurpBoton()  {
     // La CURP debe tener 18 caracteres
     //let validado=document.getElementById("inputCurp").value.trim(); 
     let curp=document.getElementById("inputCurp").value.trim();
@@ -50,11 +51,46 @@
     alert('CURP NO VALIDA, EXISTE UN ERROR EN TU CURP');
     	return false;}
     
+        $.ajax({
+            type: 'post',
+            url: 'consulta_curp.php',
+            data: curp,
+            dataType: 'json',
+            succes: function(response)
+            {
+              var jsonData = JSON.stringify(response);
+              var obj =$.parseJSON(jsonData);
+    
+              $('#curp').val(obj.curp);
+              $('#nombre').val(obj.nombre);
+              $('#paterno').val(obj.paterno);
+              $('#materno').val(obj.materno);
+              $('#fechaNac').val(obj.fechaNac);
+              $('#nombre_estado').val(obj.nombre_estado);
+              $('#sexo').val(obj.sexo);
+    
+            }
+          })
+
+
+    
+        
+
     alert('CURP VALIDA');    
     return true; //Validado
+    
  }
  //
  
+   function tipoDir(a){
+    if(a=1){
+       return 1
+    }
+    else if(a=2){
+       return 2
+    }
+
+   }
 
 
 
