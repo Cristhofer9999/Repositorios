@@ -44,7 +44,7 @@
                             
                     <form action="directorescambios.php" method="post" name="frm" onsubmit="return valida_cct();">
                             <input id="clave" type="text" class="form-control" name="clave" 
-                            placeholder="Ingresar Clave de Centro de Trabajo">  
+                            placeholder="Ingresar Clave de Centro de Trabajo" onkeyup="this.value=this.value.toUpperCase()">  
 
                       </div>
                     
@@ -62,7 +62,7 @@
     <!--Scrip de uso de Jquery-->
     <!-- Jquery -->
     <script src = "./jquery/jquery-3.6.4.min.js"></script>
-    <script src = "js/codigo.js"></script>
+    <script src = "js/validaciones.js"></script>
 
 </body>
 </html>

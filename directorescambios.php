@@ -415,9 +415,9 @@
     
     <!--Codigo de validacion-->
     <script src="./js/validaciones.js"></script>
-    <!-- Cambios -->
-    <!-- Cambios -->
-    <!--Codigo de validacion-->
+    
+    <!--SweetAlert-->
+    <script src="./plugins/sweetAlert/sweetalert2.all.min.js"></script>
 
 
 <script type="text/javascript">
@@ -444,15 +444,37 @@ $(document).ready(function(){
             let status=data.status; 
 
             if (procede=="0" && status=="500"){//falla servicio
-                alert("Servicio no disponible");
+                //alert("Servicio no disponible");
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Servicio no disponible",
+                   // footer: '<a href="">Why do I have this issue?</a>'
+                    })
+
             }
             else if (procede=="0" && status=="1"){//no encontró
-                alert("No se contontró curp");
+                //alert("No se contontró curp");
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "No se encontro ninguna CURP",
+                   // footer: '<a href="">Why do I have this issue?</a>'
+                    })
 
             }
             else if (procede=="1" && status=="1"){//exito
-                alert("se encontro y colocar datos");
+                //alert("se encontro y colocar datos");
                 //$('#mf_beneficiarioId').val(data.jIdBeneficiario);
+                Swal.fire({
+                   //position: 'top-end',
+                    icon: 'success',
+                    title: 'DATOS CORRECTOS',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
 
             }
             else{
