@@ -22,65 +22,6 @@
  }  
 
 
- //
- function validarCurpBoton()  {
-    // La CURP debe tener 18 caracteres
-    //let validado=document.getElementById("inputCurp").value.trim(); 
-    let curp=document.getElementById("inputCurp").value.trim();
-    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-    validado = curp.match(re);
-	
-    if (!validado) { //Coincide con el formato general?
-    alert('CURP NO VALIDA, EXISTE UN ERROR EN TU CURP');
-    	return false;}
-    
-    //Validar que coincida el dígito verificador
-    function digitoVerificadorT(curp17) {
-        //Fuente https://consultas.curp.gob.mx/CurpSP/
-        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
-            lngSuma      = 0.0,
-            lngDigito    = 0.0;
-        for(var i=0; i<17; i++)
-            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
-        lngDigito = 10 - lngSuma % 10;
-        if (lngDigito == 10) return 0;
-        return lngDigito;
-    }
-  
-    if (validado[2] != digitoVerificadorT(validado[1])) {
-    alert('CURP NO VALIDA, EXISTE UN ERROR EN TU CURP');
-    	return false;}
-    
-        $.ajax({
-            type: 'post',
-            url: 'consulta_curp.php',
-            data: curp,
-            dataType: 'json',
-            succes: function(response)
-            {
-              var jsonData = JSON.stringify(response);
-              var obj =$.parseJSON(jsonData);
-    
-              $('#curp').val(obj.curp);
-              $('#nombre').val(obj.nombre);
-              $('#paterno').val(obj.paterno);
-              $('#materno').val(obj.materno);
-              $('#fechaNac').val(obj.fechaNac);
-              $('#nombre_estado').val(obj.nombre_estado);
-              $('#sexo').val(obj.sexo);
-    
-            }
-          })
-
-
-    
-        
-
-    alert('CURP VALIDA');    
-    return true; //Validado
-    
- }
- //
  
    function tipoDir(a){
     if(a=1){
@@ -193,22 +134,3 @@ function enviarTexto()
 
  }
 }
-
-
-
-$(function(){
-     
-    $("#boton").click(function(){
-
-           $("#Prueba_RFC").hide();
-    })
-
-})
-
-
-
-
-
-
-
-    

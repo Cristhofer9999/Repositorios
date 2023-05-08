@@ -26,14 +26,7 @@
     <!--Estilos  -->
     <link rel="stylesheet" href="./css/iconos.css">
     
-    <!--Iconos -->
-    <script src="https://kit.fontawesome.com/6c14e3a650.js" crossorigin="anonymous"></script>
-    
-    <!--Codigo de validacion-->
-    <script src="./js/codigo.js"></script>
-    <!-- Cambios -->
-    <!-- Cambios -->
-    <!--Codigo de validacion-->
+
     
     
 
@@ -202,7 +195,7 @@
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
-                                    <button id="boton_validar_curp" type="button" onclick="return validarCurpBoton();" class="btn btn-danger">Validar C.U.R.P</button> 
+                                    <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button> 
                                 </div>
 
                                                                                                
@@ -409,6 +402,7 @@
             }, false)
         })
         })()
+
     </script>
     
     <!--Scrip de uso de Jquery-->
@@ -416,10 +410,69 @@
     src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
     crossorigin="anonymous"></script>
+        <!--Iconos -->
+    <script src="https://kit.fontawesome.com/6c14e3a650.js" crossorigin="anonymous"></script>
+    
+    <!--Codigo de validacion-->
+    <script src="./js/validaciones.js"></script>
+    <!-- Cambios -->
+    <!-- Cambios -->
+    <!--Codigo de validacion-->
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
-    <script src="./js/json.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
 
+    $("#boton_validar_curp").click(function(){
+    
+     //$("#boton_validar_curp").hide();
+     //if($("#inputCurp").val().indexOf('@', 0) == -1 || $("#inputCurp").val().indexOf('.', 0) == -1) {
+      if($("#inputCurp").val().match(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/)) {
+      
+        //alert('Formato de curp correcto.');
+       let curp=$("#inputCurp").val();
+       alert(curp);
+
+        $.ajax({
+          url: "consulta_curp.php",
+          method: "POST",
+          data: {curp: curp},
+          dataType: "json",
+          success: function(data){
+
+            let procede=data.procede;
+            let status=data.status; 
+
+            if (procede=="0" && status=="500"){//falla servicio
+                alert("Servicio no disponible");
+            }
+            else if (procede=="0" && status=="1"){//no encontró
+                alert("No se contontró curp");
+
+            }
+            else if (procede=="1" && status=="1"){//exito
+                alert("se encontro y colocar datos");
+                //$('#mf_beneficiarioId').val(data.jIdBeneficiario);
+
+            }
+            else{
+                alert("Error desconocido, vuelvA A INTENTAE");
+            }        
+
+          },
+          error: function error(){
+            alert("Error");
+          }
+        });
+      }
+     else{
+      
+      alert('Formato de curp incorrecto');
+     //alert("Hola"); 
+     }
+
+    });
+});//end ready document
+</script>>
 </body>
 </html>
