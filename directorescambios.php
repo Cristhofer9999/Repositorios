@@ -425,13 +425,12 @@ $(document).ready(function(){
 
     $("#boton_validar_curp").click(function(){
     
-     //$("#boton_validar_curp").hide();
-     //if($("#inputCurp").val().indexOf('@', 0) == -1 || $("#inputCurp").val().indexOf('.', 0) == -1) {
       if($("#inputCurp").val().match(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/)) {
       
         //alert('Formato de curp correcto.');
        let curp=$("#inputCurp").val();
-       alert(curp);
+       //alert(curp);
+       Swal.fire(curp)
 
         $.ajax({
           url: "consulta_curp.php",
@@ -449,7 +448,7 @@ $(document).ready(function(){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "Servicio no disponible",
+                    text: "Servicio no disponible, intentalo mas tarde",
                    // footer: '<a href="">Why do I have this issue?</a>'
                     })
 
@@ -467,7 +466,7 @@ $(document).ready(function(){
             }
             else if (procede=="1" && status=="1"){//exito
                 //alert("se encontro y colocar datos");
-                //$('#mf_beneficiarioId').val(data.jIdBeneficiario);
+                
                 Swal.fire({
                    //position: 'top-end',
                     icon: 'success',
@@ -475,7 +474,8 @@ $(document).ready(function(){
                     showConfirmButton: false,
                     timer: 1500
                     })
-
+                
+                //$('#mf_beneficiarioId').val(data.jIdBeneficiario);     
             }
             else{
                 alert("Error desconocido, vuelvA A INTENTAE");
