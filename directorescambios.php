@@ -135,27 +135,32 @@
                                     <div class="input-group">
                                     <select class="custom-select" id="directorInput" name="tipoDirector" aria-label="Example select with button addon">
                                                                                         
-                                    <option value="0"> <?php  echo $mostrar['cve_tipo_director']; ?> </option>
+                                    <option value="0"> 
+                                            <?php  
+                                            //echo $mostrar['cve_tipo_director'];                                     
+                                            if ($mostrar['cve_tipo_director'] == 1) {
+                                                echo ('Encargado');   
+                                            }
+                                            else if ($mostrar['cve_tipo_director'] == 2) {
+                                                echo ('Titular');
+                                            }                                                                        
+                                            ?>                                                                    
+                                    </option>
 
                                     <option value="1"> 
                                             <?php 
-                                            $tipo_dir = $mostrar['cve_tipo_director'];
-                                            if( $tipo_dir = 1){
-                                            $tipo_dir = 2;
-                                            echo $tipo_dir;
-                                        }
-                                            else if( $tipo_dir = 2){
-                                             $tipo_dir = 2;
-                                            echo $tipo_dir;  
-                                            }
+                                            if ($mostrar['cve_tipo_director'] == 1) {
+                                                echo ('Titular');
+                                                $mostrar['cve_tipo_director'] = 2;
+                                             }
+                                             else if ($mostrar['cve_tipo_director'] == 2) {
+                                                echo ('Encargado');
+                                                $mostrar['cve_tipo_director'] = 1;
+                                             }
                                             ?>  
                                     </option>
 
 
-
-
-                                    <!--<option value="1">Encargado</option> -->
-                                    <!-- <option value="2">Titular</option> -->
                                     </select>
                                     <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button">X</button>
@@ -258,7 +263,7 @@
                                         <i class="icon fa-solid fa-calendar-days fa-md"></i>
                                         <label for="fecha"  class="col-form-label">Fecha de Nacimiento</label>
                                         <div class="date" id="datepicker">
-                                        <input type="date" name="fecha" class="form-control" value="<?php echo $mostrar['fecha_nacimiento'] ?>" readonly >
+                                        <input type="date" id="fechaInput" name="fecha" class="form-control" value="<?php echo $mostrar['fecha_nacimiento'] ?>" readonly >
                                         </div>
                                  </div>
 
@@ -343,7 +348,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
                                         <i class="icon fa-solid fa-envelope fa-md"></i> 
                                         <label for="correoInsituInput"  class="form-label">Correo Institucional (Escuela)</label >   
-                                        <input type ="email" name="correo_insti" class = "form-control" value="<?php echo $mostrar['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
+                                        <input type ="email" name="correo_insti" class = "form-control" value="<?php echo $mostrar['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" required>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -430,7 +435,7 @@ $(document).ready(function(){
         //alert('Formato de curp correcto.');
        let curp=$("#inputCurp").val();
        //alert(curp);
-       Swal.fire(curp)
+           
 
         $.ajax({
           url: "consulta_curp.php",
@@ -443,30 +448,28 @@ $(document).ready(function(){
             let status=data.status; 
 
             if (procede=="0" && status=="500"){//falla servicio
+                
                 //alert("Servicio no disponible");
-
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "Servicio no disponible, intentalo mas tarde",
-                   // footer: '<a href="">Why do I have this issue?</a>'
+                    text: "¡Servicio no disponible, intentalo mas tarde!",
                     })
 
             }
-            else if (procede=="0" && status=="1"){//no encontró
+            else if (procede=="0" && status=="0"){//no encontró
+                
                 //alert("No se contontró curp");
-
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "No se encontro ninguna CURP",
-                   // footer: '<a href="">Why do I have this issue?</a>'
+                    text: "¡No se encontro ninguna CURP!",
                     })
 
             }
             else if (procede=="1" && status=="1"){//exito
-                //alert("se encontro y colocar datos");
                 
+                //alert("se encontro y colocar datos");
                 Swal.fire({
                    //position: 'top-end',
                     icon: 'success',
@@ -475,10 +478,22 @@ $(document).ready(function(){
                     timer: 1500
                     })
                 
-                //$('#mf_beneficiarioId').val(data.jIdBeneficiario);     
+                $('#nombreInput').val(data.nombre);
+                $('#paternoInput').val(data.paterno);  
+                $('#maternoInput').val(data.materno);  
+                $('#fechaInput').val(data.fechaNac);  
+                $('#entidadInput').val(data.nombre_estado);  
+                $('#sexoInput').val(data.sexo);       
             }
             else{
-                alert("Error desconocido, vuelvA A INTENTAE");
+
+                //alert("Error desconocido, vuelva a intentar");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "¡Error desconocido, vuelva a intentar!", 
+                    })
+
             }        
 
           },
@@ -488,9 +503,13 @@ $(document).ready(function(){
         });
       }
      else{
-      
-      alert('Formato de curp incorrecto');
-     //alert("Hola"); 
+
+        Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "¡Formato de curp incorrecto!",
+                    })
+                    
      }
 
     });
