@@ -53,7 +53,7 @@
          
                
             
-            <form id="formulario" class="row needs-validation" novalidate> 
+            <form id="formulario"  class="row needs-validation" novalidate> 
 
              
 
@@ -162,9 +162,10 @@
 
 
                                     </select>
-                                    <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">X</button>
-                                    </div> 
+                                    
+                                  <!-- <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="reset">X</button>
+                                    </div> --> 
                     
                                                                                              
                                     </div> 
@@ -295,7 +296,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telOfiInput"  class="form-label">Telefono de Oficina</label>   
-                                        <input type ="tel" name="telefono_ofi" class = "form-control" value="<?php echo $mostrar['telefono_oficina'] ?>" id="telOfiInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
+                                        <input type ="tel" id="telOfiInput" name="telefono_ofi" class = "form-control" value="<?php echo $mostrar['telefono_oficina'] ?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
                                         
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
@@ -306,7 +307,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telPersoInput"  class="form-label">Telefono Personal</label>   
-                                        <input type ="tel" name="telefono_perso" class = "form-control"  value="<?php echo $mostrar['telefono_particular']?>" id="telPersoInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
+                                        <input type ="tel"  id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $mostrar['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
@@ -318,7 +319,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="celInput" class="form-label">Telefono Celular</label>   
-                                        <input type ="tel" name="telefono_cel" class ="form-control" value="<?php echo $mostrar['telefono_celular']?>" id="celInput" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10"  required>
+                                        <input type ="tel" id="telCelInput" name="telefono_cel" class ="form-control" value="<?php echo $mostrar['telefono_celular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" required>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -332,8 +333,8 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
-                                        <input id="correo" type ="text" name="correo" value="<?php echo $mostrar['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
-                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[A-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?\.)+[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?$" placeholder="Ingresar Correo" onclick="validCorreo(form.correo.value)" required> 
+                                        <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $mostrar['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
+                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[A-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?\.)+[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -348,7 +349,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
                                         <i class="icon fa-solid fa-envelope fa-md"></i> 
                                         <label for="correoInsituInput"  class="form-label">Correo Institucional (Escuela)</label >   
-                                        <input type ="email" name="correo_insti" class = "form-control" value="<?php echo $mostrar['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" required>
+                                        <input type ="email" id="correoInstInput" name="correo_insti" class = "form-control" value="<?php echo $mostrar['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional @SEDUCOAHUILA.GOB.MX" required>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -361,6 +362,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"></div>
                                     
                                         <!-- Imput Oculto de clave de centro -->
+                                       
                                         <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $mostrar['cve_centro']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
 
                                     <!--Espaciado Horizontal-->
@@ -370,7 +372,7 @@
                                 <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3"> 
                                         <input id="btnEnviar" class="btn btn-warning" type="submit" value="Actualizar">
                                         <!--Boton de Cancelar-->
-                                        <button  type="button" onclick="location.reload()" class="btn btn-secondary" >Cancelar</button>
+                                        <button  type="reset"  class="btn btn-secondary" >Cancelar</button>
                                 </div>
 
                                                             <?php 
@@ -483,7 +485,14 @@ $(document).ready(function(){
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
                 $('#entidadInput').val(data.nombre_estado);  
-                $('#sexoInput').val(data.sexo);       
+                $('#sexoInput').val(data.sexo);   
+                $('#rfcInput').val("");    
+                $('#telOfiInput').val("");
+                $('#telCelInput').val("");
+                $('#telPersoInput').val("");
+                $('#correoPersoInput').val("");
+                $('#correoInstInput').val("");
+                
             }
             else{
 
