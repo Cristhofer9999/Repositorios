@@ -64,5 +64,51 @@
     <script src = "./jquery/jquery-3.6.4.min.js"></script>
     <script src = "js/validaciones.js"></script>
 
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#boton_buscar_centro").click(function(){
+            
+            //var clave=$("#clave").val();
+            let clave=$("#clave").val();
+            //alert("pueba");
+            if($("#clave").val().length == 0){
+                alert("Inserta una Clave");
+                $("#clave").focus();
+                $("#clave").select();
+            }
+            else 
+            {
+                alert(clave);
+                $.ajax({
+                    url: "LoginClaveCCT.php",
+                    type: "POST",
+                    data: {cct: clave},
+                    dataType: "json",
+                    success: function(data)
+                    {
+                        alert(data);
+                        let success=data.success; 
+
+                        if (success == 1){//hace login porque la clave si existe
+                            alert("La clave si existe");
+                        }
+                        else //si success == 0, la clave no existe
+                        {
+                            alert("La clave no existe");
+                        }
+                    },
+                    error: function error(){
+                        alert("Error");
+                    }
+                });
+            }
+        });
+    });//end ready document
+</script>
+
+
 </body>
 </html>
