@@ -46,7 +46,7 @@
                             placeholder="Ingresar Clave de Centro de Trabajo" onkeyup="this.value=this.value.toUpperCase()">  
                     </div> -->
                     <form id="myform" method="post" name="myformulario">
-                            <input id="clave" type="text" class="form-control" 
+                            <input id="clave" name="clave" type="text" class="form-control" 
                             placeholder="Ingresar Clave de Centro de Trabajo" onkeyup="this.value=this.value.toUpperCase()">  
                     </div>
                     
@@ -75,33 +75,31 @@
 
         $("#boton_buscar_centro").click(function(){
             
-            //var clave=$("#clave").val();
-            let clave=$("#clave").val();
+            let clave=$("#clave").val().trim();
             //alert("pueba");
-            if($("#clave").val().length == 0){
-                alert("Inserta una Clave");
+            if (clave.length == 0){
+                alert("La clave de CCT no puede ir vacía");
                 $("#clave").focus();
                 $("#clave").select();
             }
             else 
             {
-                alert(clave);
+                //alert(clave);
                 $.ajax({
-                    url: "LoginClaveCCT.php",
-                    type: "POST",
+                    url: "actions/valida_cct.php",
+                    method: "POST",
                     data: {cct: clave},
-                    dataType: "json",
                     success: function(data)
                     {
-                        alert(data);
-                        let success=data.success; 
+                        //alert(data);
 
-                        if (success == 1){//hace login porque la clave si existe
-                            alert("La clave si existe");
+                        if (data == 1){//hace login porque la clave si existe
+                            //alert("La clave si existe");
+                            window.location.href = "directores_cambios.php";
                         }
                         else //si success == 0, la clave no existe
                         {
-                            alert("La clave no existe");
+                            alert("La clave no existe en el catálogo");
                         }
                     },
                     error: function error(){

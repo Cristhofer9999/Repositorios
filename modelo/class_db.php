@@ -13,8 +13,6 @@ if (class_exists("class_db")!=true){
 		function __construct(){
 			//$this->set_db("172.23.114.48:3306" , "root" , "root" ,"Prueba");
 			$this->set_db("172.20.30.94" , "destadistica_usr" , "c0nsult4" ,"centros_educativos");
-			//$this->set_db("172.20.30.94" , "destadistica_usr" , "c0nsult4" ,"centros_educativos");
-			#echo "Error: Si se pudo conectar a MySQL." . PHP_EOL;
 		}
 
 		function __destruct(){

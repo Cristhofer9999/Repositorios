@@ -1,9 +1,9 @@
-
 <?php
-	$cct=$_SESSION['cve_usuario']=strtoupper($_POST['clave']);
+    session_start();
+	$cct=$_SESSION['cct'];
 
     #$mysqli->set_charset("utf8");
-    include('Conexion_POO.php');
+    include('modelo/class_db.php');
     $obj=new class_db(); 
        
 ?>
@@ -440,12 +440,12 @@ $(document).ready(function(){
            
 
         $.ajax({
-          url: "consulta_curp.php",
+          url: "actions/consulta_curp.php",
           method: "POST",
           data: {curp: curp},
           dataType: "json",
           success: function(data){
-
+            alert(JSON.stringify(data));
             let procede=data.procede;
             let status=data.status; 
 
@@ -485,13 +485,19 @@ $(document).ready(function(){
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
                 $('#entidadInput').val(data.nombre_estado);  
-                $('#sexoInput').val(data.sexo);   
+                $('#sexoInput').val(data.sexo_nombre);
+                $('#sexoInput').val($('#sexoInput').val().toUpperCase());
                 $('#rfcInput').val("");    
                 $('#telOfiInput').val("");
                 $('#telCelInput').val("");
                 $('#telPersoInput').val("");
                 $('#correoPersoInput').val("");
                 $('#correoInstInput').val("");
+
+                //para componer la Ñ de origen vienen mal;
+                $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
+                $('#paternoInput').val($('#paternoInput').val().replace("Ã","Ñ"));
+                $('#maternoInput').val($('#maternoInput').val().replace("Ã","Ñ"));
                 
             }
             else{
@@ -523,6 +529,6 @@ $(document).ready(function(){
 
     });
 });//end ready document
-</script>>
+</script>
 </body>
 </html>
