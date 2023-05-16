@@ -59,6 +59,7 @@
 
              <?php               
                                             $datosCentro=
+
                                             "SELECT 
                                             cct, nombre, turno, desc_status, nombre_de_localidad, asentamiento, nombre_vialidad_principal,
                                             municipio,nombre_de_municipio, localidad, nombre_de_localidad, desc_nivel_educativo, desc_sostenimiento
@@ -445,7 +446,7 @@ $(document).ready(function(){
           data: {curp: curp},
           dataType: "json",
           success: function(data){
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             let procede=data.procede;
             let status=data.status; 
 
@@ -485,7 +486,7 @@ $(document).ready(function(){
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
                 $('#entidadInput').val(data.nombre_estado);  
-                $('#sexoInput').val(data.sexo_nombre);
+                $('#sexoInput').val(data.sexo);
                 $('#sexoInput').val($('#sexoInput').val().toUpperCase());
                 $('#rfcInput').val("");    
                 $('#telOfiInput').val("");
@@ -513,7 +514,12 @@ $(document).ready(function(){
 
           },
           error: function error(){
-            alert("Error");
+            //alert("Error");
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "¡Error desconocido, vuelva a intentar!", 
+                    })
           }
         });
       }

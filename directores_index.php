@@ -64,6 +64,10 @@
     <!--Scrip de uso de Jquery-->
     <!-- Jquery -->
     <script src = "./jquery/jquery-3.6.4.min.js"></script>
+
+    <!--SweetAlert-->
+    <script src="./plugins/sweetAlert/sweetalert2.all.min.js"></script>
+
     <!-- <script
     src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
@@ -78,7 +82,12 @@
             let clave=$("#clave").val().trim();
             //alert("pueba");
             if (clave.length == 0){
-                alert("La clave de CCT no puede ir vacía");
+                //alert("La clave de CCT no puede ir vacía");
+                Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: "¡La clave de CCT no puede ir vacía!",
+                            })
                 $("#clave").focus();
                 $("#clave").select();
             }
@@ -99,11 +108,21 @@
                         }
                         else //si success == 0, la clave no existe
                         {
-                            alert("La clave no existe en el catálogo");
+                            //alert("La clave no existe en el catálogo");
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: "¡La clave no existe en el catálogo!",
+                            })
                         }
                     },
                     error: function error(){
-                        alert("Error");
+                        //alert("Error");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: "¡Error desconocido vuelve a intentarlo mas tarde!",
+                            })
                     }
                 });
             }
