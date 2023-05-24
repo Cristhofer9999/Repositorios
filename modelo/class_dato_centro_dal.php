@@ -45,6 +45,22 @@
 
             return $arr;
         }
+    
+    
+        function get_entidad_nac_director($cve_pais,$cve_estado){
+            $cve_pais=$this->db_conn->real_escape_string($cve_pais);
+            $cve_estado=$this->db_conn->real_escape_string($cve_estado);
+            $sql="select nombre_estado from cebasica.estados where 
+            cve_pais='$cve_pais' and cve_estado='$cve_estado'";
+            $this->set_sql($sql);
+            $rs=mysqli_query($this->db_conn,$this->db_query)
+            or die(mysqli_error($this->db_conn));
+
+            $renglon=mysqli_fetch_array($rs);
+            $valor=$renglon[0];
+            return $valor;
+        }
+    
     }
 
 ?>

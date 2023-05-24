@@ -14,6 +14,8 @@
 
     $obj_dir = new director_dal;
     $result_dir = $obj_dir->directorCct($cct);
+
+    $valor_entidad_nac=$obj_centro->get_entidad_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
      
 ?>
 
@@ -265,7 +267,7 @@
                                         <i class="icon fa-solid fa-calendar-days fa-md"></i>
                                         <label for="fecha"  class="col-form-label">Fecha de Nacimiento</label>
                                         <div class="date" id="datepicker">
-                                        <input type="date" id="fechaInput" name="fecha" class="form-control" value="<?php echo $result_dir['fecha_nacimiento'] ?>" readonly >
+                                        <input type="text" id="fechaInput" name="fecha" class="form-control" value="<?php echo $result_dir['fecha_nacimiento'] ?>" readonly >
                                         </div>
                                  </div>
 
@@ -276,7 +278,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-location-dot fa-md"></i>
                                         <label for="entidadInput"  class="form-label">Entidad de Nacimiento</label>   
-                                        <input type ="text" name="entidad" class = "form-control" value="<?php echo $result_dir['lugar_nacimiento'] ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly >
+                                        <input type ="text" name="entidad" class = "form-control" value="<?php echo $valor_entidad_nac ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly >
                                 </div>
 
                                     <!--Espaciado Horizontal-->
@@ -284,9 +286,21 @@
                                     
                                     <!--Lectura de sexo-->
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+
+                                             <?php 
+                                                if ($result_dir['sexo']=='H'){
+                                                    $desc_sexo="HOMBRE";
+                                                }
+                                                else if ($result_dir['sexo']=='M'){
+                                                    $desc_sexo="MUJER";
+                                                }
+                                                else{
+                                                    $desc_sexo="";
+                                                }                                             
+                                             ?>
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="sexoInput"  class="form-label">Sexo</label>   
-                                        <input type ="text" name="sexo" class = "form-control" value="<?php echo $result_dir['sexo'] ?>" id="sexoInput" placeholder="Sexo" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
+                                        <input type ="text" name="sexo" class = "form-control" value="<?php echo $desc_sexo ?>" id="sexoInput" placeholder="Sexo" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
                                 </div>   
 
                                     <!--Espaciado Horizontal-->
@@ -487,7 +501,7 @@ $(document).ready(function(){
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
                 $('#entidadInput').val(data.nombre_estado);  
-                $('#sexoInput').val(data.sexo);
+                $('#sexoInput').val(data.sexo_nombre);
                 $('#sexoInput').val($('#sexoInput').val().toUpperCase());
                 $('#rfcInput').val("");    
                 $('#telOfiInput').val("");

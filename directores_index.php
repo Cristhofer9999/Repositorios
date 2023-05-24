@@ -86,8 +86,17 @@
                 //alert("La clave de CCT no puede ir vacía");
                 Swal.fire({
                             icon: 'error',
-                            title: 'Oops...',
+                            title: 'Clave CCT',
                             text: "¡La clave de CCT no puede ir vacía!",
+                            })
+                $("#clave").focus();
+                $("#clave").select();
+            }
+            else if (!pattern_cct.test(clave)){
+                Swal.fire({
+                            icon: 'error',
+                            title: 'Clave Escuela',
+                            text: "¡La clave de CCT no cumple el formato ejemplo: 05DPR0001X!",
                             })
                 $("#clave").focus();
                 $("#clave").select();
