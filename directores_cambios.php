@@ -4,7 +4,7 @@
 
     #$mysqli->set_charset("utf8");
     include('modelo/class_db.php');
-    include('modelo/class_dato_centro_dal.php');
+    include('modelo/class_metodos_consulta_dal.php');
     include('modelo/class_director_dal.php');
 
     $obj=new class_db(); 
@@ -16,6 +16,7 @@
     $result_dir = $obj_dir->directorCct($cct);
 
     $valor_entidad_nac=$obj_centro->get_entidad_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
+    $valor_pais_nac=$obj_centro->get_pais_nac_director($result_dir["cve_pais"]);
      
 ?>
 
@@ -36,7 +37,7 @@
     
     <!--Estilos  -->
     <link rel="stylesheet" href="./css/iconos.css">
-    
+   
 
     
     
@@ -73,45 +74,38 @@
                                             while($result_query){ 
                                             ?>
                                                 
-                                                   <div class="row row-cols-1 row-cols-md-2 g-4"> 
+                                                   
+                            <table class="table table-hover table-bordered" >
+                             
+
+                                    <tbody>
+                                                <tr class="bg-success text-white font-weight-bold">
+                                                    <td>Clave: <?php echo $result_query['cve_centro'] ?></td>
+                                                    <td>Nombre de la escuela: <?php echo $result_query['nombre_centro'] ?></td>
                                                     
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-primary">Clave: <?php echo $result_query['cve_centro'] ?></li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-warning">Domicilio: <?php echo $result_query['nombre_centro'] ?> - 
-                                                            <?php echo strtoupper($result_query['nombre_colonia']) ?> - CALLE <?php echo $result_query['calle'] ?> </li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-secondary">Nombre de la escuela: <?php echo $result_query['nombre_centro'] ?></li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-success">Municipio: <?php echo $result_query['cve_municipio'] ?> - 
-                                                            <?php echo $result_query['municipio'] ?> </li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-danger">Turno: <?php echo $result_query['cve_turno'] ?></li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-dark">Localidad: <?php echo $result_query['cve_localidad'] ?> - 
-                                                            <?php echo $result_query['localidad'] ?></li>  
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-warning">Estatus: <?php echo $result_query['estatus'] ?></li>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
-                                                            <li class="list-group-item list-group-item-primary">Nivel/Control: <?php echo $result_query['nivel_educativo'] ?> - 
-                                                            <?php echo $result_query['sostenimiento'] ?></li>
-                                                        </div>
-
-                                                    </div> 
+                                                </tr>
+                                                <!-- .bg-primary --> <!-- .bg-success --> <!-- .bg-warning --><!-- .bg-danger --><!-- .bg-info -->
+                                                <tr class="bg-success text-white font-weight-bold">
+                                                    <td>Domicilio: <?php echo $result_query['municipio'] ?> - 
+                                                                <?php echo strtoupper($result_query['nombre_colonia']) ?> - CALLE <?php echo $result_query['calle'] ?></td>
+                                                    <td>Municipio: <?php echo $result_query['cve_municipio'] ?> - 
+                                                                            <?php echo $result_query['municipio'] ?></td>
+                                                    
+                                                </tr>
+                                                <tr class="bg-success text-white font-weight-bold">
+                                                    <td> Turno: <?php echo $result_query['cve_turno'] ?></td>
+                                                    <td>Localidad: <?php echo $result_query['cve_localidad'] ?> - 
+                                                                                    <?php echo $result_query['localidad'] ?></td>
+                                                    
+                                                </tr>
+                                                <tr class="bg-success text-white font-weight-bold">
+                                                    <td>Estatus: <?php echo $result_query['estatus'] ?></td>
+                                                    <td>Nivel/Control: <?php echo $result_query['nivel_educativo'] ?> - 
+                                                                                    <?php echo $result_query['sostenimiento'] ?></td>
+                                                    
+                                                </tr>
+                                        </tbody>
+				            </table>
                 
                                             <?php 
                                                 break;
@@ -186,7 +180,7 @@
                                      placeholder="Ingresar CURP" aria-label="Recipient's username" 
                                      aria-describedby="button-addon2" onkeyup="this.value=this.value.toUpperCase()" 
                                      oninput="validarInput(this)"  maxlength="18" minlength="18" onkeypress="return validarInput(event)"  
-                                     pattern="^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$" required>
+                                     pattern="^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$" readonly required >
                                     <i class="icon fa-solid fa-cube fa-md"></i>   
                                                                                                     
                                     <p class="resultado" id="resultado"></pclass> </p>
@@ -202,10 +196,14 @@
                                                 
                                     
                                     </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-4 col-md-3"> 
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3"> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
                                     <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button> 
-                                </div>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3 "> 
+                                    <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
+                                    <button style="background-color:DarkCyan; border-color:Teal" id="cambiar_curp" type="button" class="btn btn-danger">Cambiar C.U.R.P</button> 
+                                    </div>
 
                                                                                                
 
@@ -216,14 +214,14 @@
 
                                         <input type ="text" name="rfc" class = "form-control" value="<?php echo $result_dir['rfc'] ?>" id="rfcInput" placeholder="Ingresar RFC" 
                                         onkeyup="this.value=this.value.toUpperCase()" 
-                                        onclick="enviarTexto()" minlength="13" maxlength="13" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$" required>
+                                        onclick="enviarTexto()" minlength="13" maxlength="13" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$" readonly required>
 
                                         <p class="resultadoRfc" id="resultadoRfc"> </p>
                                         <div class="valid-tooltip">
                                             Formato de R.F.C. valido
                                         </div>
                                         <div class="invalid-tooltip">
-                                            Agrega los ultimos 3 digitos de tu R.F.C y/o valida tu curp.
+                                            Agrega la Homoclave a tu R.F.C y/o valida tu curp.
                                         </div>
                                         <i class="icon fa-solid fa-id-badge fa-md"></i>
                                 </div>
@@ -237,7 +235,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-4"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="nombreInput"  class="form-label">Nombre</label>   
-                                        <input type ="text" name="nombre" value="<?php echo $result_dir['nombre'] ?>" class = "form-control" id="nombreInput" placeholder="Nombre" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly > 
+                                        <input type ="text" name="nombre" value="<?php echo $result_dir['nombre'] ?>" class = "form-control" id="nombreInput" placeholder="Nombre" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required> 
                                 </div>
 
                                     <!--Espaciado Horizontal-->
@@ -249,14 +247,14 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="paternoInput"  class="form-label">Apellido Paterno</label>   
-                                        <input type ="text" name="paterno" class = "form-control" value="<?php echo $result_dir['apellido_paterno'] ?>" id="paternoInput" placeholder="Apellido Paterno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
+                                        <input type ="text" name="paterno" class = "form-control" value="<?php echo $result_dir['apellido_paterno'] ?>" id="paternoInput" placeholder="Apellido Paterno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required>
                                 </div>
                                     
                                     <!--Lectura de materno-->
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="maternoInput"  class="form-label">Apellido Materno</label>   
-                                        <input type ="text" name="materno" class = "form-control" value="<?php echo $result_dir['apellido_materno'] ?>" id="maternoInput" placeholder="Apellido Materno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
+                                        <input type ="text" name="materno" class = "form-control" value="<?php echo $result_dir['apellido_materno'] ?>" id="maternoInput" placeholder="Apellido Materno" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required>
                                 </div>
                                     
 
@@ -267,7 +265,7 @@
                                         <i class="icon fa-solid fa-calendar-days fa-md"></i>
                                         <label for="fecha"  class="col-form-label">Fecha de Nacimiento</label>
                                         <div class="date" id="datepicker">
-                                        <input type="text" id="fechaInput" name="fecha" class="form-control" value="<?php echo $result_dir['fecha_nacimiento'] ?>" readonly >
+                                        <input type="text" id="fechaInput" name="fecha" class="form-control" value="<?php echo $result_dir['fecha_nacimiento'] ?>" placeholder="Fecha de Nacimiento" readonly required>
                                         </div>
                                  </div>
 
@@ -278,11 +276,16 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
                                         <i class="icon fa-solid fa-location-dot fa-md"></i>
                                         <label for="entidadInput"  class="form-label">Entidad de Nacimiento</label>   
-                                        <input type ="text" name="entidad" class = "form-control" value="<?php echo $valor_entidad_nac ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly >
+                                        <input type ="text" name="entidad" class = "form-control" value="<?php echo $valor_entidad_nac ?>" id="entidadInput" placeholder="Entidad" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required>
                                 </div>
 
-                                    <!--Espaciado Horizontal-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">  </div>
+                                    <!--Lectura de Pais-->
+                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">  
+                                <i class="icon fa-solid fa-location-dot fa-md"></i>
+                                        <label for="paisInput"  class="form-label">País de Nacimiento</label>   
+                                        <input type ="text" name="pais" class = "form-control" value="<?php echo strtoupper($valor_pais_nac) ?>" id="paisInput" placeholder="Pais de Nacimiento" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required>
+
+                                </div>
                                     
                                     <!--Lectura de sexo-->
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
@@ -300,7 +303,7 @@
                                              ?>
                                         <i class="icon fa-solid fa-person fa-md"></i>
                                         <label for="sexoInput"  class="form-label">Sexo</label>   
-                                        <input type ="text" name="sexo" class = "form-control" value="<?php echo $desc_sexo ?>" id="sexoInput" placeholder="Sexo" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly>
+                                        <input type ="text" name="sexo" class = "form-control" value="<?php echo $desc_sexo ?>" id="sexoInput" placeholder="Sexo" onkeyup="this.value=this.value.toUpperCase()" onkeypress="return soloLetras(event)" readonly required>
                                 </div>   
 
                                     <!--Espaciado Horizontal-->
@@ -311,7 +314,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telOfiInput"  class="form-label">Telefono de Oficina</label>   
-                                        <input type ="tel" id="telOfiInput" name="telefono_ofi" class = "form-control" value="<?php echo $result_dir['telefono_oficina'] ?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
+                                        <input type ="tel" id="telOfiInput" name="telefono_ofi" class = "form-control" value="<?php echo $result_dir['telefono_oficina'] ?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
                                         
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
@@ -322,7 +325,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telPersoInput"  class="form-label">Telefono Personal</label>   
-                                        <input type ="tel"  id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10">
+                                        <input type ="tel"  id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
@@ -334,7 +337,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="celInput" class="form-label">Telefono Celular</label>   
-                                        <input type ="tel" id="telCelInput" name="telefono_cel" class ="form-control" value="<?php echo $result_dir['telefono_celular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" required>
+                                        <input type ="tel" id="telCelInput" name="telefono_cel" class ="form-control" value="<?php echo $result_dir['telefono_celular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -349,7 +352,7 @@
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
                                         <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
-                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[A-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?\.)+[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" required> 
+                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[A-Z0-9!#$%&'+/=?^_`{|}~-]+(?:\.[A-Z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[A-Z0-9](?:[A-Z0-9-][A-Z0-9])?\.)+[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" readonly required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -362,9 +365,13 @@
 
                                     <!--Peticion telefono de correo institucional-->
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+
+                                        <?php
+                                            $correo_institucional = $result_query['cve_centro']."@SEDUCOAHUILA.GOB.MX";
+                                        ?>
                                         <i class="icon fa-solid fa-envelope fa-md"></i> 
                                         <label for="correoInsituInput"  class="form-label">Correo Institucional (Escuela)</label >   
-                                        <input type ="email" id="correoInstInput" name="correo_insti" class = "form-control" value="<?php echo $result_dir['correo_electronico_institucional']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional @SEDUCOAHUILA.GOB.MX" required>
+                                        <input type ="email" id="correoInstInput" name="correo_insti" class = "form-control" value="<?php echo $correo_institucional?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional @SEDUCOAHUILA.GOB.MX" readonly>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -501,6 +508,7 @@ $(document).ready(function(){
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
                 $('#entidadInput').val(data.nombre_estado);  
+                $('#paisInput').val(data.nombre_pais);  
                 $('#sexoInput').val(data.sexo_nombre);
                 $('#sexoInput').val($('#sexoInput').val().toUpperCase());
                 $('#rfcInput').val("");    
@@ -508,7 +516,7 @@ $(document).ready(function(){
                 $('#telCelInput').val("");
                 $('#telPersoInput').val("");
                 $('#correoPersoInput').val("");
-                $('#correoInstInput').val("");
+                //$('#correoInstInput').val("");
 
                 //para componer la Ñ de origen vienen mal;
                 $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
@@ -548,7 +556,37 @@ $(document).ready(function(){
                     
      }
 
-    });
+    }); //end fuction #boton_validar_curp
+
+    $("#cambiar_curp").click(function(){
+
+        $("#inputCurp").prop("readonly", false);
+        $("#inputCurp").val("");
+
+        $("#rfcInput").prop("readonly", false);
+        $("#rfcInput").val("");
+        
+        $('#nombreInput').val("");
+        $('#paternoInput').val("");  
+        $('#maternoInput').val(""); 
+        $('#fechaInput').val(""); 
+        $('#entidadInput').val("");
+        $('#paisInput').val(""); 
+        $('#sexoInput').val("");
+
+        $('#telOfiInput').prop("readonly", false);
+        $('#telOfiInput').val("");
+
+        $('#telCelInput').prop("readonly", false);
+        $('#telCelInput').val("");
+
+        $('#telPersoInput').prop("readonly", false);
+        $('#telPersoInput').val("");
+
+        $('#correoPersoInput').prop("readonly", false);
+        $('#correoPersoInput').val("");
+    }); //end function #cambiar_curp
+
 });//end ready document
 </script>
 </body>

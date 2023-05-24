@@ -26,15 +26,6 @@
             $arr = mysqli_fetch_array($rs);
 
             return $arr;
-
-            // if($arr)
-            // {
-            //     return new self($arr['nombre'], $arr['curp'], $cct);
-            // }
-            // else
-            // {
-            //     return false;
-            // }
         }
     }
 ?>
