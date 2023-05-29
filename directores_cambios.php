@@ -198,6 +198,7 @@
                                     </div>
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3"> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
+                                    <label  id="text_validar_curp" for="boton_validar_curp" style="display: none; color: red; font-weight: bolder; font-size: 10px;" >Es necesario validar tu CURP*</label>
                                     <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button> 
                                     </div>
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3 "> 
@@ -325,7 +326,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telPersoInput"  class="form-label">Telefono Personal</label>   
-                                        <input type ="tel"  id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
+                                        <input type ="tel" id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" required readonly>
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
@@ -352,7 +353,7 @@
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
                                         <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
-                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[A-Z0-9!#$%&'+/=?^_`{|}~-]+(?:\.[A-Z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[A-Z0-9](?:[A-Z0-9-][A-Z0-9])?\.)+[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" readonly required> 
+                                        onkeyup="this.value=this.value.toUpperCase()" pattern="/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" readonly required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -460,6 +461,8 @@ $(document).ready(function(){
         //alert('Formato de curp correcto.');
        let curp=$("#inputCurp").val();
        //alert(curp);
+
+       $('#text_validar_curp').hide(); 
            
 
         $.ajax({
@@ -507,8 +510,8 @@ $(document).ready(function(){
                 $('#paternoInput').val(data.paterno);  
                 $('#maternoInput').val(data.materno);  
                 $('#fechaInput').val(data.fechaNac);  
-                $('#entidadInput').val(data.nombre_estado);  
-                $('#paisInput').val(data.nombre_pais);  
+                //$('#entidadInput').val(data.nombre_estado);  
+                //$('#paisInput').val(data.nombre_pais);  
                 $('#sexoInput').val(data.sexo_nombre);
                 $('#sexoInput').val($('#sexoInput').val().toUpperCase());
                 $('#rfcInput').val("");    
@@ -517,6 +520,26 @@ $(document).ready(function(){
                 $('#telPersoInput').val("");
                 $('#correoPersoInput').val("");
                 //$('#correoInstInput').val("");
+
+                $('#btnEnviar').show();
+
+                //Propuesta solucion a nacidos en el extranjero
+                if(data.nombre_estado == "Extranjero") 
+                {
+                    $('#entidadInput').val("NACIDO EN EL EXTRANJERO");
+                }
+                else
+                {
+                    $('#entidadInput').val(data.nombre_estado);
+                }
+                if(data.nombre_pais == "Otros Paises")
+                {
+                    $('#paisInput').val("MEXICO");
+                }
+                else
+                {
+                    $('#paisInput').val(data.nombre_pais);
+                }
 
                 //para componer la Ñ de origen vienen mal;
                 $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
@@ -585,6 +608,9 @@ $(document).ready(function(){
 
         $('#correoPersoInput').prop("readonly", false);
         $('#correoPersoInput').val("");
+
+        $("#btnEnviar").css("display", "none");
+        $('#text_validar_curp').show();
     }); //end function #cambiar_curp
 
 });//end ready document
