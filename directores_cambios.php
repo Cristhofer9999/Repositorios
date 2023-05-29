@@ -24,24 +24,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambio de director</title>
+    <?php
+        include_once "inclusiones/meta_tags.php"; 
+    ?>
+        <title>Cambio de director</title>
     
-    <!-- Bootstrap CSS -->
-    <!--Bootstrap trabaja con internet-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">     
-    <!-- Bootstrap trabaja sin internet -->
-    <!-- <link href="ccs /bootstrap.min.ccs" rel="stylesheet" /> -->
-    
-    <!--Estilos  -->
-    <link rel="stylesheet" href="./css/iconos.css">
-   
-
-    
-    
-
+    <?php
+        include_once "inclusiones/css_incluidos_y_favicon.php"; 
+    ?>
 </head>
 <body>
     
@@ -408,9 +398,6 @@
     </div>
 
 
-
-
-
     <!--Scrip de validacion de campos con Bootstrap-->
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -435,20 +422,7 @@
 
     </script>
     
-    <!--Scrip de uso de Jquery-->
-    <script
-    src="https://code.jquery.com/jquery-3.6.3.min.js"
-    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-    crossorigin="anonymous"></script>
-        <!--Iconos -->
-    <script src="https://kit.fontawesome.com/6c14e3a650.js" crossorigin="anonymous"></script>
-    
-    <!--Codigo de validacion-->
-    <script src="./js/validaciones.js"></script>
-    
-    <!--SweetAlert-->
-    <script src="./plugins/sweetAlert/sweetalert2.all.min.js"></script>
-
+    <?php include_once "inclusiones/js_incluidos.php"; ?>
 
 <script type="text/javascript">
 $(document).ready(function(){
