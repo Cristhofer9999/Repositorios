@@ -16,7 +16,7 @@
     $result_dir = $obj_dir->directorCct($cct);
 
     $valor_entidad_nac=$obj_centro->get_entidad_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
-    $valor_pais_nac=$obj_centro->get_pais_nac_director($result_dir["cve_pais"]);
+    $valor_pais_nac=$obj_centro->get_pais_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
      
 ?>
 
@@ -508,7 +508,7 @@ $(document).ready(function(){
                 }
                 if(data.nombre_pais == "Otros Paises")
                 {
-                    $('#paisInput').val("MEXICO");
+                    $('#paisInput').val("PAIS EXTRANJERO");
                 }
                 else
                 {

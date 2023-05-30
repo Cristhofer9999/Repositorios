@@ -33,7 +33,7 @@
                             <input id="clave" type="text" class="form-control" name="clave" 
                             placeholder="Ingresar Clave de Centro de Trabajo" onkeyup="this.value=this.value.toUpperCase()">  
                     </div> -->
-                    <form id="myform" method="post" name="myformulario">
+                    <form id="myform" method="post" name="myform">
                             <input id="clave" name="clave" type="text" class="form-control" 
                             placeholder="Ingresar Clave de Centro de Trabajo" maxlength="10" 
                             onkeyup="this.value=this.value.toUpperCase()">  

@@ -61,7 +61,7 @@
             return $valor;
         }
 
-        function get_pais_nac_director($cve_pais){
+        function get_pais_nac_director($cve_pais,$cve_estado){
             $cve_pais=$this->db_conn->real_escape_string($cve_pais);
             $sql="select nombre_pais from cebasica.pais_continente where 
             cve_pais='$cve_pais'";
@@ -71,7 +71,14 @@
 
             $renglon=mysqli_fetch_array($rs);
             $valor=$renglon[0];
-            return $valor;
+            
+            if ($cve_estado>32){
+                return 'PAIS EXTRANJERO';
+            }
+            else{
+                return $valor;
+            }
+            
         }
     
     }
