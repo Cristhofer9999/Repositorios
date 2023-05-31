@@ -205,7 +205,7 @@
 
                                         <input type ="text" name="rfc" class = "form-control" value="<?php echo $result_dir['rfc'] ?>" id="rfcInput" placeholder="Ingresar RFC" 
                                         onkeyup="this.value=this.value.toUpperCase()" 
-                                        onclick="enviarTexto()" minlength="13" maxlength="13" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$" readonly required>
+                                        onclick="enviarTexto()" minlength="13" maxlength="13" autocomplete="off" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$" readonly required>
 
                                         <p class="resultadoRfc" id="resultadoRfc"> </p>
                                         <div class="valid-tooltip">
@@ -305,8 +305,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telOfiInput"  class="form-label">Telefono de Oficina</label>   
-                                        <input type ="tel" id="telOfiInput" name="telefono_ofi" class = "form-control" value="<?php echo $result_dir['telefono_oficina'] ?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
-                                        
+                                        <input type ="tel" id="telOfiInput" name="telefono_ofi" class = "form-control" value="<?php echo $result_dir['telefono_oficina'] ?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" autocomplete="off"  required>
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
@@ -316,7 +315,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="telPersoInput"  class="form-label">Telefono Personal</label>   
-                                        <input type ="tel" id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" required readonly>
+                                        <input type ="tel" id="telPersoInput" name="telefono_perso" class = "form-control"  value="<?php echo $result_dir['telefono_particular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10"  minlength="10" autocomplete="off" required >
                                         <div class="invalid-tooltip">
                                             Favor de introducir los 10 digitos.
                                         </div>
@@ -328,7 +327,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-phone fa-md"></i>
                                         <label for="celInput" class="form-label">Telefono Celular</label>   
-                                        <input type ="tel" id="telCelInput" name="telefono_cel" class ="form-control" value="<?php echo $result_dir['telefono_celular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" readonly required>
+                                        <input type ="tel" id="telCelInput" name="telefono_cel" class ="form-control" value="<?php echo $result_dir['telefono_celular']?>" placeholder="(999)-999-9999" onkeypress="return soloNumero(event)" onpaste="return false" maxlength="10" minlength="10" autocomplete="off"  required>
                                         <div class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -343,7 +342,7 @@
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
                                         <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
-                                        onkeyup="this.value=this.value.toUpperCase()" pattern="/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" readonly required> 
+                                        onkeyup="this.value=this.value.toUpperCase()" pattern="/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" autocomplete="off"  required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
@@ -519,6 +518,9 @@ $(document).ready(function(){
                 $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
                 $('#paternoInput').val($('#paternoInput').val().replace("Ã","Ñ"));
                 $('#maternoInput').val($('#maternoInput').val().replace("Ã","Ñ"));
+
+                $('#inputCurp').prop("readonly", true);
+               
                 
             }
             else{
@@ -571,20 +573,12 @@ $(document).ready(function(){
         $('#paisInput').val(""); 
         $('#sexoInput').val("");
 
-        $('#telOfiInput').prop("readonly", false);
-        $('#telOfiInput').val("");
-
-        $('#telCelInput').prop("readonly", false);
-        $('#telCelInput').val("");
-
-        $('#telPersoInput').prop("readonly", false);
-        $('#telPersoInput').val("");
-
-        $('#correoPersoInput').prop("readonly", false);
-        $('#correoPersoInput').val("");
+        
 
         $("#btnEnviar").css("display", "none");
         $('#text_validar_curp').show();
+
+        $('#inputCurp').focus();
     }); //end function #cambiar_curp
 
 });//end ready document
