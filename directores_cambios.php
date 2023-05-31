@@ -342,7 +342,7 @@
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
                                         <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
-                                        onkeyup="this.value=this.value.toUpperCase()" pattern="/^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" autocomplete="off"  required> 
+                                        onkeyup="this.value=this.value.toUpperCase()" pattern="^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" autocomplete="off"  required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
                                         </div>
