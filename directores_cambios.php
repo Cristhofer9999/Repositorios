@@ -14,6 +14,10 @@
 
     $obj_dir = new director_dal;
     $result_dir = $obj_dir->directorCct($cct);
+    /* echo '<pre>';
+    print_r($result_dir);
+    echo '</pre>';
+    exit;  */
 
     $valor_entidad_nac=$obj_centro->get_entidad_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
     $valor_pais_nac=$obj_centro->get_pais_nac_director($result_dir["cve_pais"],$result_dir["cve_estado"]);
@@ -55,7 +59,7 @@
          
                
             
-            <form id="formulario"  class="row needs-validation" novalidate> 
+            <form id="formulario" method="post" action="actions/actualizar_director.php" class="row needs-validation" novalidate> 
 
              
 
@@ -120,36 +124,32 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6" >     
                                     <label for="tipoDirector">Tipo de director</label> 
                                     <div class="input-group">
+                                    
+<?php
+        
+        include('modelo/class_tipo_director_dal.php');
+        $obj_lista_tipo_dir= new tipo_director_dal;
+        $result_lista_tipo_dir=$obj_lista_tipo_dir->obtener_lista_tipo_director();
+/*      echo '<pre>';
+        print_r($result_lista_tipo_dir);
+        echo '</pre>';
+        exit; 
+ */         if ($result_lista_tipo_dir==NULL){
+                echo '<h2>No se encontraron empresas</h2>';
+        }
+        else{
+?>                                           
+                                    
                                     <select class="custom-select" id="directorInput" name="tipoDirector" aria-label="Example select with button addon">
-                                                                                        
-                                    <option value="0"> 
-                                            <?php  
-                                            //echo $result_dir['cve_tipo_director'];                                     
-                                            if ($result_dir['cve_tipo_director'] == 1) {
-                                                echo ('Encargado');   
-                                            }
-                                            else if ($result_dir['cve_tipo_director'] == 2) {
-                                                echo ('Titular');
-                                            }                                                                        
-                                            ?>                                                                    
-                                    </option>
-
-                                    <option value="1"> 
-                                            <?php 
-                                            if ($result_dir['cve_tipo_director'] == 1) {
-                                                echo ('Titular');
-                                                $result_dir['cve_tipo_director'] = 2;
-                                             }
-                                             else if ($result_dir['cve_tipo_director'] == 2) {
-                                                echo ('Encargado');
-                                                $result_dir['cve_tipo_director'] = 1;
-                                             }
-                                            ?>  
-                                    </option>
-
+<?php
+        foreach ($result_lista_tipo_dir as $key => $value){									
+?>
+	    <option value="<?=$value->cve_tipo_director; ?>" <?php if ($result_dir['cve_tipo_director']==$value->cve_tipo_director){ echo 'selected';} ?>><?=$value->tipo_director; ?></option>
+<?php } ?>							                                                                                        
+                                   
 
                                     </select>
-                                    
+<?php } ?>                                    
                                   <!-- <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="reset">X</button>
                                     </div> --> 
@@ -196,7 +196,7 @@
                                     <button style="background-color:DarkCyan; border-color:Teal" id="cambiar_curp" type="button" class="btn btn-danger">Cambiar C.U.R.P</button> 
                                     
                                     <!-- Flag para uso de Query -->
-                                        <select class="custom-select" id="flag" name="flag" aria-label="Example select with button addon">                                                
+                                        <select class="custom-select" id="flag_upddir" name="flag_upddir" aria-label="Example select with button addon">                                                
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                         </select>
@@ -591,23 +591,11 @@ $(document).ready(function(){
         $('#inputCurp').focus();
         
         //Bandera de uso de Query
-        $('#flag').val(value="1");
+        $('#flag_upddir').val(value="1");
     }); //end function #cambiar_curp
 
     
-    //Codigo de validacion
-    $("#btnEnviar").click(function(){
-                if($('#flag').val() == "0"){
-                    alert("Query simple");  
-
-                }
-                else if($('#flag').val() == "1"){
-                    
-                    alert("Query del web service");
-                }
-                });
-
-    
+   
 
 });//end ready document
 </script>
