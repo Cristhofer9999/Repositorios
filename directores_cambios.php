@@ -194,6 +194,13 @@
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3 "> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
                                     <button style="background-color:DarkCyan; border-color:Teal" id="cambiar_curp" type="button" class="btn btn-danger">Cambiar C.U.R.P</button> 
+                                    
+                                    <!-- Flag para uso de Query -->
+                                        <select class="custom-select" id="flag" name="flag" aria-label="Example select with button addon">                                                
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                        </select>
+
                                     </div>
 
                                                                                                
@@ -412,11 +419,14 @@
             form.addEventListener('submit', event => {
             if (!form.checkValidity()) {
                 event.preventDefault()
-                event.stopPropagation()
+                event.stopPropagation()  
+              
             }
-
+           
             form.classList.add('was-validated')
-            }, false)
+            }, 
+            
+            false)
         })
         })()
 
@@ -579,7 +589,25 @@ $(document).ready(function(){
         $('#text_validar_curp').show();
 
         $('#inputCurp').focus();
+        
+        //Bandera de uso de Query
+        $('#flag').val(value="1");
     }); //end function #cambiar_curp
+
+    
+    //Codigo de validacion
+    $("#btnEnviar").click(function(){
+                if($('#flag').val() == "0"){
+                    alert("Query simple");  
+
+                }
+                else if($('#flag').val() == "1"){
+                    
+                    alert("Query del web service");
+                }
+                });
+
+    
 
 });//end ready document
 </script>
