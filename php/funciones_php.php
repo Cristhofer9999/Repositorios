@@ -6,6 +6,12 @@ function valida_curp($curp){
     return $result; // Outputs 1
 }
 
+function valida_rfc($rfc){
+   $pattern = "/([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?/i";
+   $result= preg_match($pattern, $rfc);
+   return $result; // Outputs 1
+}
+
 function msg($title,$text,$type){
                         print "<script>";
                             print "Swal.fire({
