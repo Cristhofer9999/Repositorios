@@ -43,14 +43,15 @@
 
             $this->set_sql($sql);
             $rs = mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
-            
-            if($rs)
-            {
-                return true;
+
+            if(mysqli_num_rows($rs) == 0){
+                echo nl2br("No se realizo el UPDATE \n");
+                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
             }
             else
             {
-                return false;
+                echo nl2br("Si se realizo el UPDATE \n");
+                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
             }
         }
 
@@ -80,6 +81,18 @@
                             tipo_actualizacion = '$tipo_actualizacion'
                         WHERE cv_centro = $cct";
 
+            $this->set_sql($sql);
+            $rs = mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
+
+            if(mysqli_num_rows($rs) == 0){
+                echo nl2br("No se realizo el UPDATE \n");
+                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+            }
+            else
+            {
+                echo nl2br("Si se realizo el UPDATE \n");
+                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+            }
         }
 
         //Metodo para obtener la clave 'cve_tipo_director' con la descripcion
