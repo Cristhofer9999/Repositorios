@@ -29,7 +29,7 @@
         }
 
         //Metodo para actualizar los datos del director cuando el uausrio no cambia la curp
-        function updateDirectorFacil($cct, $cve_tipo_director, $telefono_oficina, $telefono_particular, $telefono_celular, $correo_electronico_personal)
+        function updateDirectorNoCURP($cct, $cve_tipo_director, $telefono_oficina, $telefono_particular, $telefono_celular, $correo_electronico_personal)
         {
             $cct=$this->db_conn->real_escape_string($cct);
 

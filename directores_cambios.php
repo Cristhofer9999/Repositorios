@@ -188,7 +188,7 @@
                                     </div>
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3"> 
                                     <!--<button id="boton_validar_curp" type="button" onclick="return valida_curp();" class="btn btn-danger">Validar C.U.R.P</button> -->
-                                    <label  id="text_validar_curp" for="boton_validar_curp" style="display: none; color: red; font-weight: bolder; font-size: 10px;" >Es necesario validar tu CURP*</label>
+                                    <label id="text_validar_curp" for="boton_validar_curp" style="display: none; color: red; font-weight: bolder; font-size: 10px;" >Es necesario validar tu CURP*</label>
                                     <button id="boton_validar_curp" type="button" class="btn btn-danger">Validar C.U.R.P</button> 
                                     </div>
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 my-4 col-md-3 "> 
@@ -196,7 +196,7 @@
                                     <button style="background-color:DarkCyan; border-color:Teal" id="cambiar_curp" type="button" class="btn btn-danger">Cambiar C.U.R.P</button> 
                                     
                                     <!-- Flag para uso de Query -->
-                                        <select class="custom-select" id="flag_upddir" name="flag_upddir" aria-label="Example select with button addon">                                                
+                                        <select class="custom-select" style="display:none;" id="flag_upddir" name="flag_upddir" aria-label="Example select with button addon">                                                
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                         </select>
@@ -437,6 +437,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+    //Desactiva el boton de validar curp 
+    $('#boton_validar_curp').prop("disabled", true);
+
     $("#boton_validar_curp").click(function(){
     
       if($("#inputCurp").val().match(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/)) {
@@ -447,6 +450,17 @@ $(document).ready(function(){
 
        $('#text_validar_curp').hide(); 
            
+       function getEdad(dateString) {
+            let hoy = new Date()
+            let fechaNacimiento = new Date(dateString)
+            let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+            let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+            if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate()))
+            {
+                edad--;
+            }
+            return edad;
+        }
 
         $.ajax({
           url: "actions/consulta_curp.php",
@@ -480,56 +494,72 @@ $(document).ready(function(){
             }
             else if (procede=="1" && status=="1"){//exito
                 
-                //alert("se encontro y colocar datos");
-                Swal.fire({
-                   //position: 'top-end',
-                    icon: 'success',
-                    title: 'DATOS CORRECTOS',
-                    showConfirmButton: false,
-                    timer: 1500
+                if(getEdad(data.fechaNac) < 18)
+                {
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "¡La CURP debe ser de alguien mayor a 18 años!", 
                     })
+                    
+                } 
+                else
+                {
                 
-                $('#nombreInput').val(data.nombre);
-                $('#paternoInput').val(data.paterno);  
-                $('#maternoInput').val(data.materno);  
-                $('#fechaInput').val(data.fechaNac);  
-                //$('#entidadInput').val(data.nombre_estado);  
-                //$('#paisInput').val(data.nombre_pais);  
-                $('#sexoInput').val(data.sexo_nombre);
-                $('#sexoInput').val($('#sexoInput').val().toUpperCase());
-                $('#rfcInput').val("");    
-                $('#telOfiInput').val("");
-                $('#telCelInput').val("");
-                $('#telPersoInput').val("");
-                $('#correoPersoInput').val("");
-                //$('#correoInstInput').val("");
+                        //alert("se encontro y colocar datos");
+                        Swal.fire({
+                        //position: 'top-end',
+                            icon: 'success',
+                            title: 'DATOS CORRECTOS',
+                            showConfirmButton: false,
+                            timer: 1500
+                            })
+                        
+                        $('#nombreInput').val(data.nombre);
+                        $('#paternoInput').val(data.paterno);  
+                        $('#maternoInput').val(data.materno);  
+                        $('#fechaInput').val(data.fechaNac);  
+                        //$('#entidadInput').val(data.nombre_estado);  
+                        //$('#paisInput').val(data.nombre_pais);  
+                        $('#sexoInput').val(data.sexo_nombre);
+                        $('#sexoInput').val($('#sexoInput').val().toUpperCase());
+                        $('#rfcInput').val("");    
+                        $('#telOfiInput').val("");
+                        $('#telCelInput').val("");
+                        $('#telPersoInput').val("");
+                        $('#correoPersoInput').val("");
+                        //$('#correoInstInput').val("");
 
-                $('#btnEnviar').show();
+                        $('#btnEnviar').show();
 
-                //Propuesta solucion a nacidos en el extranjero
-                if(data.nombre_estado == "Extranjero") 
-                {
-                    $('#entidadInput').val("NACIDO EN EL EXTRANJERO");
-                }
-                else
-                {
-                    $('#entidadInput').val(data.nombre_estado);
-                }
-                if(data.nombre_pais == "Otros Paises")
-                {
-                    $('#paisInput').val("PAIS EXTRANJERO");
-                }
-                else
-                {
-                    $('#paisInput').val(data.nombre_pais);
+                        //Propuesta solucion a nacidos en el extranjero
+                        if(data.nombre_estado == "Extranjero") 
+                        {
+                            $('#entidadInput').val("NACIDO EN EL EXTRANJERO");
+                        }
+                        else
+                        {
+                            $('#entidadInput').val(data.nombre_estado);
+                        }
+                        if(data.nombre_pais == "Otros Paises")
+                        {
+                            $('#paisInput').val("PAIS EXTRANJERO");
+                        }
+                        else
+                        {
+                            $('#paisInput').val(data.nombre_pais);
+                        }
+
+                        //para componer la Ñ de origen vienen mal;
+                        $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
+                        $('#paternoInput').val($('#paternoInput').val().replace("Ã","Ñ"));
+                        $('#maternoInput').val($('#maternoInput').val().replace("Ã","Ñ"));
+
+                        $('#inputCurp').prop("readonly", true);
+
                 }
 
-                //para componer la Ñ de origen vienen mal;
-                $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
-                $('#paternoInput').val($('#paternoInput').val().replace("Ã","Ñ"));
-                $('#maternoInput').val($('#maternoInput').val().replace("Ã","Ñ"));
 
-                $('#inputCurp').prop("readonly", true);
                
                 
             }
@@ -569,6 +599,9 @@ $(document).ready(function(){
 
     $("#cambiar_curp").click(function(){
 
+        //Activa el boton de validar curp
+        $('#boton_validar_curp').prop("disabled", false);
+
         $("#inputCurp").prop("readonly", false);
         $("#inputCurp").val("");
 
@@ -582,6 +615,10 @@ $(document).ready(function(){
         $('#entidadInput').val("");
         $('#paisInput').val(""); 
         $('#sexoInput').val("");
+        $('#telOfiInput').val("");
+        $('#telCelInput').val("");
+        $('#telPersoInput').val("");
+        $('#correoPersoInput').val("");
 
         
 
