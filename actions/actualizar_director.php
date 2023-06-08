@@ -13,6 +13,8 @@
 <body>
 
 <?php
+session_start();
+$cct=$_SESSION['cct'];
  ini_set('display_errors', 1);
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL); 
@@ -312,7 +314,56 @@
         
         //mostrar errores  y hacer el UPDATE
         if (!$errores){
-            echo 'Ya update';
+            /*proceso de update*/
+            include('../class/class_director_dal.php');
+            $fecha_actualizacion = date("Y-m-d h:i:s");
+            if ($flag_upddir==0){
+                $obj_director= new director(
+            
+                    $cve_centro,
+                    $tipoDirector,
+                    $pais,//falta
+                    $estado,//falta
+                    $rfc,
+                    $curp,
+                    $nombre,
+                    $paterno,
+                    $materno,
+                    $fecha,
+                    $entidad,
+                    $sexo,
+                    $telefono_ofi,
+                    $telefono_perso,
+                    $telefono_cel,
+                    $correo_insti,
+                    $correo,
+                    null,
+                    null,
+                    null,
+                    $cct,
+                    $fecha_actualizacion,
+                    $flag_upddir
+                );
+                $metodos_director=new director_dal;
+                if ($metodos_director->updateDirectorNoCURP($obj_director)=="1"){
+                    echo "sweealert ok";
+                }else{
+                    echo "algo salio mal";
+                    return;
+                }
+                
+
+            }
+            if ($flag_upddir==1){
+
+            }
+            else{
+                echo "La bandera llegó con valor desconocido";
+                return;
+            }
+
+
+
         }else{
             echo '<ul style="color:red;font-size:25px">';
 				foreach ($errores as $error):

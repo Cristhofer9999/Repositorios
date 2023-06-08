@@ -29,7 +29,7 @@
         }
 
         //Metodo para actualizar los datos del director cuando el uausrio no cambia la curp
-        function updateDirectorNoCURP($cct, $cve_tipo_director, $telefono_oficina, $telefono_particular, $telefono_celular, $correo_electronico_personal)
+        function updateDirectorNoCURP($obj)
         {
             $cct=$this->db_conn->real_escape_string($cct);
 
@@ -109,5 +109,96 @@
 
             return $arr;
         }
+   
+        function actualiza_actividad($obj){
+            /*
+                    echo '<pre>';
+                    echo print_r($obj);
+                    echo '</pre>';
+                    exit;
+            */
+                    $img1 = $obj->getEVIDENCIA1();
+                    $img2 = $obj->getEVIDENCIA2();
+                    if (strlen($img1)>0 && strlen($img2)>0){
+                        $sql = "update actividad set ";
+                        $sql .= "CURP="."'".$obj->getCURP()."',";
+                        $sql .= "CLAVE_SECCION="."'".$obj->getCLAVESECCION()."',";
+                        $sql .= "NOMBRE_ACTIVIDAD="."'".$obj->getNOMBREACTIVIDAD()."',";
+                        $sql .= "FECHA_ACTIVIDAD="."'".$obj->getFECHAACTIVIDAD()."',";
+                        $sql .= "HORA_INICIO_ACTIVIDAD="."'".$obj->getHORAINICIOACTIVIDAD()."',";
+                        $sql .= "HORA_FIN_ACTIVIDAD="."'".$obj->getHORAFINACTIVIDAD()."',";
+                        $sql .= "LUGAR="."'".$obj->getLUGAR()."',";
+                        $sql .= "LAT="."'".$obj->getLAT()."',";
+                        $sql .= "LON="."'".$obj->getLON()."',";                                
+                        $sql .= "BENEFICIARIOS="."'".$obj->getBENEFICIARIOS()."',";
+                        $sql .= "EVIDENCIA1="."'".$obj->getEVIDENCIA1()."',";        
+                        $sql .= "EVIDENCIA2="."'".$obj->getEVIDENCIA2()."'";
+                        $sql .= " where ID_ACTIVIDAD = '".$obj->getIDACTIVIDAD()."'";
+            
+                    }
+                    else if (strlen($img1)==0 && strlen($img2)==0){
+                        $sql = "update actividad set ";
+                        $sql .= "CURP="."'".$obj->getCURP()."',";
+                        $sql .= "CLAVE_SECCION="."'".$obj->getCLAVESECCION()."',";
+                        $sql .= "NOMBRE_ACTIVIDAD="."'".$obj->getNOMBREACTIVIDAD()."',";
+                        $sql .= "FECHA_ACTIVIDAD="."'".$obj->getFECHAACTIVIDAD()."',";
+                        $sql .= "HORA_INICIO_ACTIVIDAD="."'".$obj->getHORAINICIOACTIVIDAD()."',";
+                        $sql .= "HORA_FIN_ACTIVIDAD="."'".$obj->getHORAFINACTIVIDAD()."',";
+                        $sql .= "LUGAR="."'".$obj->getLUGAR()."',";
+                        $sql .= "LAT="."'".$obj->getLAT()."',";
+                        $sql .= "LON="."'".$obj->getLON()."',";                                
+                        $sql .= "BENEFICIARIOS="."'".$obj->getBENEFICIARIOS()."'";
+                        $sql .= " where ID_ACTIVIDAD = '".$obj->getIDACTIVIDAD()."'";            
+                    }
+                    else if (strlen($img1)>0 && strlen($img2)==0){
+                        $sql = "update actividad set ";
+                        $sql .= "CURP="."'".$obj->getCURP()."',";
+                        $sql .= "CLAVE_SECCION="."'".$obj->getCLAVESECCION()."',";
+                        $sql .= "NOMBRE_ACTIVIDAD="."'".$obj->getNOMBREACTIVIDAD()."',";
+                        $sql .= "FECHA_ACTIVIDAD="."'".$obj->getFECHAACTIVIDAD()."',";
+                        $sql .= "HORA_INICIO_ACTIVIDAD="."'".$obj->getHORAINICIOACTIVIDAD()."',";
+                        $sql .= "HORA_FIN_ACTIVIDAD="."'".$obj->getHORAFINACTIVIDAD()."',";
+                        $sql .= "LUGAR="."'".$obj->getLUGAR()."',";
+                        $sql .= "LAT="."'".$obj->getLAT()."',";
+                        $sql .= "LON="."'".$obj->getLON()."',";                                
+                        $sql .= "BENEFICIARIOS="."'".$obj->getBENEFICIARIOS()."',";
+                        $sql .= "EVIDENCIA1="."'".$obj->getEVIDENCIA1()."'";        
+                        $sql .= " where ID_ACTIVIDAD = '".$obj->getIDACTIVIDAD()."'";
+                    }
+                    else if (strlen($img1)==0 && strlen($img2)>0){
+                        $sql = "update actividad set ";
+                        $sql .= "CURP="."'".$obj->getCURP()."',";
+                        $sql .= "CLAVE_SECCION="."'".$obj->getCLAVESECCION()."',";
+                        $sql .= "NOMBRE_ACTIVIDAD="."'".$obj->getNOMBREACTIVIDAD()."',";
+                        $sql .= "FECHA_ACTIVIDAD="."'".$obj->getFECHAACTIVIDAD()."',";
+                        $sql .= "HORA_INICIO_ACTIVIDAD="."'".$obj->getHORAINICIOACTIVIDAD()."',";
+                        $sql .= "HORA_FIN_ACTIVIDAD="."'".$obj->getHORAFINACTIVIDAD()."',";
+                        $sql .= "LUGAR="."'".$obj->getLUGAR()."',";
+                        $sql .= "LAT="."'".$obj->getLAT()."',";
+                        $sql .= "LON="."'".$obj->getLON()."',";                                
+                        $sql .= "BENEFICIARIOS="."'".$obj->getBENEFICIARIOS()."',";
+                        $sql .= "EVIDENCIA2="."'".$obj->getEVIDENCIA2()."'";
+                        $sql .= " where ID_ACTIVIDAD = '".$obj->getIDACTIVIDAD()."'";           
+                    }
+                    //echo $sql;//exit;
+                    
+                    $this->set_sql($sql);
+                    $this->db_conn->set_charset("utf8");
+                    
+                    mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
+            
+             
+            
+                    if(mysqli_affected_rows($this->db_conn)==1) {
+                        $actualizado=1;
+                    }else{
+                        $actualizado=0;
+                    }
+                    unset($obj);
+                    return $actualizado;
+                }
+            
+   
+   
     }
 ?>
