@@ -170,6 +170,26 @@ $cct=$_SESSION['cct'];
         return;
     }
 
+    //CLAVE DE PAIS
+    if (isset($_POST['cve_pais'])){
+        $cve_pais=strtoupper($_POST['cve_pais']);
+    }
+    else{
+        $cve_pais=null;
+        echo 'NO RECIBI DATO DE CLAVE DE PAIS';
+        return;
+    }
+
+    //CLAVE DE ESTADO
+    if (isset($_POST['cve_estado'])){
+        $cve_estado=strtoupper($_POST['cve_estado']);
+    }
+    else{
+        $cve_estado=null;
+        echo 'NO RECIBI DATO DE CLAVE DE ESTADO';
+        return;
+    }
+
     //BANDERA
     if (isset($_POST['flag_upddir'])){
         $flag_upddir=strtoupper($_POST['flag_upddir']);
@@ -212,8 +232,11 @@ $cct=$_SESSION['cct'];
         echo "<br>";
         echo $cve_centro= $_POST['cve_centro'];
         echo "<br>";
+        echo $cve_pais= $_POST['cve_pais'];
+        echo "<br>";
+        echo $cve_estado= $_POST['cve_estado'];
+        echo "<br>";
         echo $flag_upddir= $_POST['flag_upddir'];
-
 
         //aplicar validaicones server side
         require_once '../php/funciones_php.php';
@@ -303,6 +326,17 @@ $cct=$_SESSION['cct'];
         if (!validaRequerido($cve_centro)){
 			$errores[]='El campo de cve_centro llegó vacio';
 		}
+
+        //CLAVE PAIS
+        if (!validaRequerido($cve_pais)){
+			$errores[]='El campo de cve_pais llegó vacio';
+		}
+
+        //CLAVE ESTADO
+        if (!validaRequerido($cve_estado)){
+			$errores[]='El campo de cve_estado llegó vacio';
+		}
+
 
         //BANDERA
         if (!validaRequerido($flag_upddir)){

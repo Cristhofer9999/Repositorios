@@ -348,7 +348,7 @@
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3"> 
                                         <i class="icon fa-solid fa-envelope fa-md"></i>
                                         <label for="correoInput"  class="form-label"> Correo Personal Institucional</label>   
-                                        <input id="correoPersoInput" type ="text" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
+                                        <input id="correoPersoInput" type ="email" name="correo" value="<?php echo $result_dir['correo_electronico_personal']?>" class = "form-control" id="correolInput" 
                                         onkeyup="this.value=this.value.toUpperCase()" pattern="^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$" placeholder="Ingresar Correo @DOCENTECOAHUILA.GOB.MX" onclick="validCorreo(form.correo.value)" autocomplete="off"  required> 
                                         <div id="correoValid" class="valid-tooltip">
                                             CAMPO OK.
@@ -382,8 +382,11 @@
                                     
                                         <!-- Imput Oculto de clave de centro -->
                                        
-                                        <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $result_dir['cve_centro']?>" id="correoInsituInput" placeholder="Ingresar Correo Institucional" readonly required>
-
+                                        <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $result_dir['cve_centro']?>" id="cve_centro" placeholder="cve_centro" readonly required>
+                                        <input type ="hidden" name="cve_pais" class = "form-control-hidden" value="<?php echo $result_dir['cve_pais']?>" id="cve_pais" placeholder="cve_pais" readonly required>
+                                        <input type ="hidden" name="cve_estado" class = "form-control-hidden" value="<?php echo $result_dir['cve_estado']?>" id="cve_estado" placeholder="cve_estado" readonly required>
+                                
+                                        
                                     <!--Espaciado Horizontal-->
                                 <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9"> </div>
 
@@ -517,7 +520,7 @@ $(document).ready(function(){
                         
                         $('#nombreInput').val(data.nombre);
                         $('#paternoInput').val(data.paterno);  
-                        $('#maternoInput').val(data.materno);  
+                        $('#maternoInput').val(data.materno); 
                         $('#fechaInput').val(data.fechaNac);  
                         //$('#entidadInput').val(data.nombre_estado);  
                         //$('#paisInput').val(data.nombre_pais);  
@@ -528,27 +531,43 @@ $(document).ready(function(){
                         $('#telCelInput').val("");
                         $('#telPersoInput').val("");
                         $('#correoPersoInput').val("");
+
+                        
                         //$('#correoInstInput').val("");
 
                         $('#btnEnviar').show();
 
                         //Propuesta solucion a nacidos en el extranjero
-                        if(data.nombre_estado == "Extranjero") 
+                        if(data.nombre_estado == "Extranjero" || data.nombre_estado == "NACIDO EN EL EXTRANJERO") 
                         {
                             $('#entidadInput').val("NACIDO EN EL EXTRANJERO");
-                        }
-                        else
-                        {
-                            $('#entidadInput').val(data.nombre_estado);
-                        }
-                        if(data.nombre_pais == "Otros Paises")
-                        {
+                            $('#cve_estado').val("33");
+                            $('#cve_pais').val("10");
                             $('#paisInput').val("PAIS EXTRANJERO");
-                        }
+
+                                if(data.materno == ""){
+                                    $('#maternoInput').val("X");
+                                } 
+                        } 
                         else
                         {
                             $('#paisInput').val(data.nombre_pais);
+                            $('#entidadInput').val(data.nombre_estado);
+                            $('#cve_pais').val(data.cvePais);
+                            $('#cve_estado').val(data.cveEstado);
                         }
+                        // if(data.nombre_pais == "Otros Paises")
+                        // {
+                        //     $('#paisInput').val("PAIS EXTRANJERO");
+                        //     $('#cve_pais').val("10");
+                        // }
+                        // else
+                        // {
+                        //     //$('#paisInput').val(data.nombre_pais);
+                        //     $('#cve_pais').val(data.cvePais);
+                        //     $('#cve_estado').val(data.cveEstado);
+                            
+                        // }
 
                         //para componer la Ñ de origen vienen mal;
                         $('#nombreInput').val($('#nombreInput').val().replace("Ã","Ñ"));
@@ -619,6 +638,8 @@ $(document).ready(function(){
         $('#telCelInput').val("");
         $('#telPersoInput').val("");
         $('#correoPersoInput').val("");
+        $('#cve_pais').val("");
+        $('#cve_estado').val("");
 
         
 
