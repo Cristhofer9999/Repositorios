@@ -356,16 +356,16 @@ $cct=$_SESSION['cct'];
             
                     $cve_centro,
                     $tipoDirector,
-                    $pais,//falta
-                    $estado,//falta
-                    $rfc,
-                    $curp,
-                    $nombre,
-                    $paterno,
-                    $materno,
-                    $fecha,
-                    $entidad,
-                    $sexo,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
                     $telefono_ofi,
                     $telefono_perso,
                     $telefono_cel,
@@ -389,7 +389,42 @@ $cct=$_SESSION['cct'];
 
             }
             if ($flag_upddir==1){
-
+                $obj_director= new director(
+            
+                    $cve_centro,
+                    $tipoDirector,
+                    $cve_pais,
+                    $cve_estado,
+                    $rfc,
+                    $curp,
+                    $nombre,
+                    $paterno,
+                    $materno,
+                    $fecha,
+                    $entidad,
+                    $sexo,
+                    $telefono_ofi,
+                    $telefono_perso,
+                    $telefono_cel,
+                    $correo_insti,
+                    $correo,
+                    null,
+                    null,
+                    null,
+                    $cct,
+                    $fecha_actualizacion,
+                    $flag_upddir
+                );
+                $metodos_director=new director_dal;
+                if ($metodos_director->updateDiretorCompleto($obj_director)=="1")
+                {
+                    echo "sweealert ok";
+                }
+                else
+                {
+                    echo "algo salio mal";
+                    return;
+                }
             }
             else{
                 echo "La bandera llegó con valor desconocido";

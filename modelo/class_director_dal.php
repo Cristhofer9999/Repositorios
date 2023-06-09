@@ -31,68 +31,88 @@
         //Metodo para actualizar los datos del director cuando el uausrio no cambia la curp
         function updateDirectorNoCURP($obj)
         {
-            $cct=$this->db_conn->real_escape_string($cct);
+            // echo '<pre>';
+            // echo print_r($obj);
+            // echo '</pre>';
+            // exit;
+            
+            // $cct=$this->db_conn->real_escape_string($cct);
 
-            $sql = "UPDATE centros_educativos
-                        SET cve_tipo_director = '$cve_tipo_director',
-                            telefono_oficina = '$telefono_oficina',
-			                telefono_particular = '$telefono_particular',
-			                telefono_celular = '$telefono_celular',
-			                correo_electronico_personal = '$correo_electronico_personal']
-		                WHERE cv_centro = '$cct'";
+            $sql = "update director set ";
+            $sql .= "cve_tipo_director = "."'".$obj->getCveTipoDirector()."',";
+            $sql .= "telefono_oficina = "."'".$obj->getTelefonoOficina()."',";
+            $sql .= "telefono_particular = "."'".$obj->getTelefonoParticular()."',";
+            $sql .= "telefono_celular = "."'".$obj->getTelefonoCelular()."',";
+            $sql .= "correo_electronico_personal = "."'".$obj->getCorreoElectronicoPersonal()."'";
+            $sql .= "where cv_centro = '".$obj->getCveCentro()."'";
+            
+            // echo $sql;//exit;
 
             $this->set_sql($sql);
-            $rs = mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
-
-            if(mysqli_num_rows($rs) == 0){
-                echo nl2br("No se realizo el UPDATE \n");
-                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+            // $this->db_conn->set_charset("utf8");
+            
+            mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
+            
+            if(mysqli_affected_rows($this->db_conn) == 1)
+            {
+                $actualizado = 1;
             }
             else
             {
-                echo nl2br("Si se realizo el UPDATE \n");
-                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+                $actualizado = 0;
             }
+            unset($obj);
+            return $actualizado;
         }
 
         //Metodo para actualizar los datos del director cuando el usuario cambia la curp
-        function updateDiretorCompleto($cct, $cve_tipo_director, $cve_pais, $cve_estado, $rfc, $curp, $nombre, $apellido_paterno, $apellido_materno, $fecha_nacimiento, $lugar_nacimiento, $sexo, $telefono_oficina, $telefono_particular, $telefono_celular, $correo_electronico_personal, $cve_usuario, $fecha_actualizacion, $tipo_actualizacion)
+        function updateDiretorCompleto($obj)
         {
-            $cct=$this->db_conn->real_escape_string($cct);
+            // echo '<pre>';
+            // echo print_r($obj);
+            // echo '</pre>';
+            // exit;
 
-            $sql = "UPDATE centros_educativos.director
-                        SET cve_tipo_director = '$cve_tipo_director',
-                            cve_pais = '$cve_pais',
-                            cve_estado = '$cve_estado',
-                            rfc = '$rfc',
-                            curp = '$curp',
-                            nombre = '$nombre',
-                            apellido_paterno = '$apellido_paterno',
-                            apellido_materno = '$apellido_materno,
-                            fecha_nacimiento = '$fecha_nacimiento',
-                            lugar_nacimiento = '$lugar_nacimiento',
-                            sexo = '$sexo',
-                            telefono_oficina = '$telefono_oficina',
-                            telefono_particular = '$telefono_particular',
-                            telefono_celular = '$telefono_celular',
-                            correo_electronico_personal = '$correo_electronico_personal',
-                            cve_usuario = '$cve_usuario',
-                            fecha_actualizacion = getdate(),
-                            tipo_actualizacion = '$tipo_actualizacion'
-                        WHERE cv_centro = $cct";
+            // $cct=$this->db_conn->real_escape_string($cct);
+
+            $sql = "update director set ";
+            $sql .= "cve_tipo_director = "."'".$obj->getCveTipoDirector()."',";
+            $sql .= "cve_pais = "."'".$obj->getCvePais()."',";
+            $sql .= "cve_estado = "."'".$obj->getCveEstado()."',";
+            $sql .= "rfc = "."'".$obj->getRfc()."',";
+            $sql .= "curp = "."'".$obj->getCurp()."',";
+            $sql .= "nombre = "."'".$obj->getNombre()."',";
+            $sql .= "apellido_paterno = "."'".$obj->getApellidoPaterno()."',";
+            $sql .= "apellido_materno = "."'".$obj->getApellidoMaterno()."',";
+            $sql .= "fecha_nacimiento = "."'".$obj->getFechaNacimiento()."',";
+            $slq .= "lugar_nacimiento = "."'".$obj->getLugarNacimiento()."',";
+            $sql .= "sexo = "."'".$obj->getSexo()."',";
+            $sql .= "telefono_oficina = "."'".$obj->getTelefonoOficina()."',";
+            $sql .= "telefono_particular = "."'".$obj->getTelefonoParticular()."',";
+            $sql .= "telefono_celular = "."'".$obj->getTelefonoCelular()."',";
+            $sql .= "correo_electronico_personal = "."'".$obj->getCorreoElectronicoPersonal()."',";
+            $sql .= "cve_usuario = "."'".$obj->getCveUsuario()."',";
+            $sql .= "fecha_actualizacion = "."'".$obj->getFechaActualizacion()."',";
+            $sql .= "tipo_actualizacion = "."'".$obj->getTipoActualizacion()."'";
+            $sql .= "where cv_centro = '".$obj->getCveCentro()."'";
+            
+            // echo $sql;//exit;
 
             $this->set_sql($sql);
-            $rs = mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
-
-            if(mysqli_num_rows($rs) == 0){
-                echo nl2br("No se realizo el UPDATE \n");
-                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+            // $this->db_conn->set_charset("utf8");
+            
+            mysqli_query($this->db_conn,$this->db_query) or die(mysqli_error($this->db_conn));
+            
+            if(mysqli_affected_rows($this->db_conn) == 1)
+            {
+                $actualizado = 1;
             }
             else
             {
-                echo nl2br("Si se realizo el UPDATE \n");
-                echo "Affected rows (UPDATE): " . mysqli_affected_rows($this->db_conn);
+                $actualizado = 0;
             }
+            unset($obj);
+            return $actualizado;
         }
 
         //Metodo para obtener la clave 'cve_tipo_director' con la descripcion
