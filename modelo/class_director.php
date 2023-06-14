@@ -164,7 +164,7 @@ if(class_exists('director')!=true)
         /**
          * Set the value of rfc
          */
-        public function setRfc($cve_rfc)
+        public function setRfc($rfc)
         {
                 $this->rfc = $rfc;
 

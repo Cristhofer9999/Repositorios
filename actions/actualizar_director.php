@@ -102,7 +102,7 @@ $cct=$_SESSION['cct'];
 
     //SEXO
     if (isset($_POST['sexo'])){
-        $sexo=strtoupper($_POST['sexo']);
+        $sexo=strtoupper(substr($_POST['sexo'],0,1));
     }
     else{
         $sexo=null;
@@ -201,42 +201,42 @@ $cct=$_SESSION['cct'];
     }
 
         //
-        echo $tipoDirector=$_POST['tipoDirector'] ; 
+        echo $tipoDirector; 
         echo "<br>";
-        echo $curp=$_POST['curp'];
+        echo $curp;
         //$curp="PEP1740714HCLRNV02";
         echo "<br>";
-        echo $rfc  = $_POST['rfc'];
+        echo $rfc ;
         echo "<br>";
-        echo $nombre  = $_POST['nombre'];
+        echo $nombre ;
         echo "<br>";
-        echo $paterno = $_POST['paterno'];
+        echo $paterno;
         echo "<br>";
-        echo $materno  = $_POST['materno'];
+        echo $materno;
         echo "<br>";
-        echo $fecha = $_POST['fecha'];
+        echo $fecha;
         echo "<br>";
-        echo $entidad = $_POST['entidad'];
+        echo $entidad;
         echo "<br>";
-        echo $sexo= $_POST['sexo'];
+        echo $sexo;
         echo "<br>";
-        echo $telefono_ofi = $_POST['telefono_ofi'];
+        echo $telefono_ofi;
         echo "<br>";
-        echo $telefono_perso = $_POST['telefono_perso'];
+        echo $telefono_perso;
         echo "<br>";
-        echo$telefono_cel= $_POST['telefono_cel'];
+        echo$telefono_cel;
         echo "<br>";
-        echo $correo = $_POST['correo'];
+        echo $correo;
         echo "<br>";
-        echo $correo_insti = $_POST['correo_insti'];
+        echo $correo_insti;
         echo "<br>";
-        echo $cve_centro= $_POST['cve_centro'];
+        echo $cve_centro;
         echo "<br>";
-        echo $cve_pais= $_POST['cve_pais'];
+        echo $cve_pais;
         echo "<br>";
-        echo $cve_estado= $_POST['cve_estado'];
+        echo $cve_estado;
         echo "<br>";
-        echo $flag_upddir= $_POST['flag_upddir'];
+        echo $flag_upddir;
 
         //aplicar validaicones server side
         require_once '../php/funciones_php.php';
@@ -278,9 +278,9 @@ $cct=$_SESSION['cct'];
 		}
 
         //MATERNO
-        if (!validaRequerido($materno)){
+        /*if (!validaRequerido($materno)){
 			$errores[]='El campo materno llegó vacio';
-		}
+		}*/
 
         //FECHA
         if (!validaRequerido($fecha)){
@@ -349,7 +349,7 @@ $cct=$_SESSION['cct'];
         //mostrar errores  y hacer el UPDATE
         if (!$errores){
             /*proceso de update*/
-            include('../class/class_director_dal.php');
+            include('../modelo/class_director_dal.php');
             $fecha_actualizacion = date("Y-m-d h:i:s");
             if ($flag_upddir==0){
                 $obj_director= new director(
@@ -388,7 +388,7 @@ $cct=$_SESSION['cct'];
                 
 
             }
-            if ($flag_upddir==1){
+            else if ($flag_upddir==1){
                 $obj_director= new director(
             
                     $cve_centro,

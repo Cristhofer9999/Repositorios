@@ -382,9 +382,9 @@
                                     
                                         <!-- Imput Oculto de clave de centro -->
                                        
-                                        <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $result_dir['cve_centro']?>" id="cve_centro" placeholder="cve_centro" readonly required>
-                                        <input type ="hidden" name="cve_pais" class = "form-control-hidden" value="<?php echo $result_dir['cve_pais']?>" id="cve_pais" placeholder="cve_pais" readonly required>
-                                        <input type ="hidden" name="cve_estado" class = "form-control-hidden" value="<?php echo $result_dir['cve_estado']?>" id="cve_estado" placeholder="cve_estado" readonly required>
+                                        <input type ="hidden" name="cve_centro" class = "form-control-hidden" value="<?php echo $cct; ?>" id="cve_centro" placeholder="cve_centro" readonly required>
+                                        <input type ="hidden" name="cve_pais" class = "form-control-hidden" value="<?php echo $result_dir['cve_pais']; ?>" id="cve_pais" placeholder="cve_pais" readonly required>
+                                        <input type ="hidden" name="cve_estado" class = "form-control-hidden" value="<?php echo $result_dir['cve_estado']; ?>" id="cve_estado" placeholder="cve_estado" readonly required>
                                 
                                         
                                     <!--Espaciado Horizontal-->
@@ -538,16 +538,16 @@ $(document).ready(function(){
                         $('#btnEnviar').show();
 
                         //Propuesta solucion a nacidos en el extranjero
-                        if(data.nombre_estado == "Extranjero" || data.nombre_estado == "NACIDO EN EL EXTRANJERO") 
+                        if(data.cveEstado=="33" || data.nombre_estado == "Extranjero" || data.nombre_estado == "NACIDO EN EL EXTRANJERO") 
                         {
                             $('#entidadInput').val("NACIDO EN EL EXTRANJERO");
                             $('#cve_estado').val("33");
                             $('#cve_pais').val("10");
                             $('#paisInput').val("PAIS EXTRANJERO");
 
-                                if(data.materno == ""){
+                                /*if(data.materno == ""){
                                     $('#maternoInput').val("X");
-                                } 
+                                }*/ 
                         } 
                         else
                         {
@@ -649,7 +649,7 @@ $(document).ready(function(){
         $('#inputCurp').focus();
         
         //Bandera de uso de Query
-        $('#flag_upddir').val(value="1");
+        $('#flag_upddir').val("1");
     }); //end function #cambiar_curp
 
     

@@ -12,7 +12,7 @@ if (class_exists("class_db")!=true){
 
 		function __construct(){
 			//$this->set_db("172.21.255.252:3306" , "root" , "root" ,"centros_educativos");
-			$this->set_db("172.20.30.251" , "destadistica_usr" , "c0nsult4" ,"centros_educativos");
+			$this->set_db("172.20.30.251" , "destadistica_adm" , "D1reccion" ,"centros_educativos");
 		}
 
 		function __destruct(){
