@@ -30,24 +30,26 @@
 
         //Metodo para actualizar los datos del director cuando el uausrio no cambia la curp
         function updateDirectorNoCURP($obj)
-        {
-            // echo '<pre>';
-            // echo print_r($obj);
-            // echo '</pre>';
-            // exit;
-            
+        {         
             // $cct=$this->db_conn->real_escape_string($cct);
+            $getCveTipoDirector=$this->db_conn->real_escape_string($obj->getCveTipoDirector());
+            $getTelefonoOficina=$this->db_conn->real_escape_string($obj->getTelefonoOficina());
+            $getTelefonoParticular=$this->db_conn->real_escape_string($obj->getTelefonoParticular());
+            $getTelefonoCelular=$this->db_conn->real_escape_string($obj->getTelefonoCelular());
+            $getCorreoElectronicoPersonal=$this->db_conn->real_escape_string($obj->getCorreoElectronicoPersonal());
+            $getCorreoElectronicoInstitucional=$this->db_conn->real_escape_string($obj->getCorreoElectronicoInstitucional());
+            $getCveCentro=$this->db_conn->real_escape_string($obj->getCveCentro());
 
             $sql = "update director set ";
-            $sql .= "cve_tipo_director = "."'".$obj->getCveTipoDirector()."',";
-            $sql .= "telefono_oficina = "."'".$obj->getTelefonoOficina()."',";
-            $sql .= "telefono_particular = "."'".$obj->getTelefonoParticular()."',";
-            $sql .= "telefono_celular = "."'".$obj->getTelefonoCelular()."',";
-            $sql .= "correo_electronico_personal = "."'".$obj->getCorreoElectronicoPersonal()."',";
-            $sql .= "correo_electronico_institucional = "."'".$obj->getCorreoElectronicoInstitucional()."'";
-            $sql .= " where cve_centro = '".$obj->getCveCentro()."'";
+            $sql .= "cve_tipo_director = "."'".$getCveTipoDirector."', ";
+            $sql .= "telefono_oficina = "."'".$getTelefonoOficina."', ";
+            $sql .= "telefono_particular = "."'".$getTelefonoParticular."', ";
+            $sql .= "telefono_celular = "."'".$getTelefonoCelular."', ";
+            $sql .= "correo_electronico_personal = "."'".$getCorreoElectronicoPersonal."', ";
+            $sql .= "correo_electronico_institucional = "."'".$getCorreoElectronicoInstitucional."'";
+            $sql .= " where cve_centro = '".$getCveCentro."'";
             
-             //echo '<br>'.$sql;exit;
+            // echo '<br>'.$sql;exit;
 
             $this->set_sql($sql);
             // $this->db_conn->set_charset("utf8");
@@ -75,30 +77,50 @@
             // exit;
 
             // $cct=$this->db_conn->real_escape_string($cct);
+            $getCveTipoDirector=$this->db_conn->real_escape_string($obj->getCveTipoDirector());
+            $getCvePais=$this->db_conn->real_escape_string($obj->getCvePais());
+            $getCveEstado=$this->db_conn->real_escape_string($obj->getCveEstado());
+            $getRfc=$this->db_conn->real_escape_string($obj->getRfc());
+            $getCurp=$this->db_conn->real_escape_string($obj->getCurp());
+            $getNombre=$this->db_conn->real_escape_string($obj->getNombre());
+            $getApellidoPaterno=$this->db_conn->real_escape_string($obj->getApellidoPaterno());
+            $getApellidoMaterno=$this->db_conn->real_escape_string($obj->getApellidoMaterno());
+            $getFechaNacimiento=$this->db_conn->real_escape_string($obj->getFechaNacimiento());
+            $getLugarNacimiento=$this->db_conn->real_escape_string($obj->getLugarNacimiento());
+            $getSexo=$this->db_conn->real_escape_string($obj->getSexo());
+            $getTelefonoOficina=$this->db_conn->real_escape_string($obj->getTelefonoOficina());
+            $getTelefonoParticular=$this->db_conn->real_escape_string($obj->getTelefonoParticular());
+            $getTelefonoCelular=$this->db_conn->real_escape_string($obj->getTelefonoCelular());
+            $getCorreoElectronicoPersonal=$this->db_conn->real_escape_string($obj->getCorreoElectronicoPersonal());
+            $getCorreoElectronicoInstitucional=$this->db_conn->real_escape_string($obj->getCorreoElectronicoInstitucional());
+            $getCveUsuario=$this->db_conn->real_escape_string($obj->getCveUsuario());
+            $getFechaActualizacion=$this->db_conn->real_escape_string($obj->getFechaActualizacion());
+            $getTipoActualizacion=$this->db_conn->real_escape_string($obj->getTipoActualizacion());
+            $getCveCentro=$this->db_conn->real_escape_string($obj->getCveCentro());
 
             $sql = "update director set ";
-            $sql .= "cve_tipo_director = "."'".$obj->getCveTipoDirector()."',";
-            $sql .= "cve_pais = "."'".$obj->getCvePais()."',";
-            $sql .= "cve_estado = "."'".$obj->getCveEstado()."',";
-            $sql .= "rfc = "."'".$obj->getRfc()."',";
-            $sql .= "curp = "."'".$obj->getCurp()."',";
-            $sql .= "nombre = "."'".$obj->getNombre()."',";
-            $sql .= "apellido_paterno = "."'".$obj->getApellidoPaterno()."',";
-            $sql .= "apellido_materno = "."'".$obj->getApellidoMaterno()."',";
-            $sql .= "fecha_nacimiento = "."'".$obj->getFechaNacimiento()."',";
-            $sql .= "lugar_nacimiento = "."'".$obj->getLugarNacimiento()."',";
-            $sql .= "sexo = "."'".$obj->getSexo()."',";
-            $sql .= "telefono_oficina = "."'".$obj->getTelefonoOficina()."',";
-            $sql .= "telefono_particular = "."'".$obj->getTelefonoParticular()."',";
-            $sql .= "telefono_celular = "."'".$obj->getTelefonoCelular()."',";
-            $sql .= "correo_electronico_personal = "."'".$obj->getCorreoElectronicoPersonal()."',";
-            $sql .= "correo_electronico_institucional = "."'".$obj->getCorreoElectronicoInstitucional()."',";
-            $sql .= "cve_usuario = "."'".$obj->getCveUsuario()."',";
-            $sql .= "fecha_actualizacion = "."'".$obj->getFechaActualizacion()."',";
-            $sql .= "tipo_actualizacion = "."'".$obj->getTipoActualizacion()."'";
-            $sql .= " where cve_centro = '".$obj->getCveCentro()."'";
+            $sql .= "cve_tipo_director = "."'".$getCveTipoDirector."', ";
+            $sql .= "cve_pais = "."'".$getCvePais."', ";
+            $sql .= "cve_estado = "."'".$getCveEstado."', ";
+            $sql .= "rfc = "."'".$getRfc."', ";
+            $sql .= "curp = "."'".$getCurp."', ";
+            $sql .= "nombre = "."'".$getNombre."', ";
+            $sql .= "apellido_paterno = "."'".$getApellidoPaterno."', ";
+            $sql .= "apellido_materno = "."'".$getApellidoMaterno."', ";
+            $sql .= "fecha_nacimiento = "."'".$getFechaNacimiento."', ";
+            $sql .= "lugar_nacimiento = "."'".$getLugarNacimiento."', ";
+            $sql .= "sexo = "."'".$getSexo."', ";
+            $sql .= "telefono_oficina = "."'".$getTelefonoOficina."', ";
+            $sql .= "telefono_particular = "."'".$getTelefonoParticular."', ";
+            $sql .= "telefono_celular = "."'".$getTelefonoCelular."', ";
+            $sql .= "correo_electronico_personal = "."'".$getCorreoElectronicoPersonal."', ";
+            $sql .= "correo_electronico_institucional = "."'".$getCorreoElectronicoInstitucional."', ";
+            $sql .= "cve_usuario = "."'".$getCveUsuario."', ";
+            $sql .= "fecha_actualizacion = "."'".$getFechaActualizacion."', ";
+            $sql .= "tipo_actualizacion = "."'".$getTipoActualizacion."'";
+            $sql .= " where cve_centro = '".$getCveCentro."'";
             
-             //echo '<br>'.$sql;exit;
+            // echo '<br>'.$sql;exit;
 
             $this->set_sql($sql);
             // $this->db_conn->set_charset("utf8");

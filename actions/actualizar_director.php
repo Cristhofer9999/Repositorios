@@ -9,6 +9,8 @@
     <?php
         include_once "../inclusiones/css_incluidos_y_favicon.php"; 
     ?>
+    <?php include_once "../inclusiones/js_incluidos.php"; ?>
+
 </head>
 <body>
 
@@ -18,6 +20,9 @@ $cct=$_SESSION['cct'];
  ini_set('display_errors', 1);
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL); 
+
+
+
  if ($_POST){
 
     //Tipo Director    
@@ -199,7 +204,7 @@ $cct=$_SESSION['cct'];
         echo 'NO RECIBI DATO DE BANDERA';
         return;
     }
-
+         /*
         //
         echo $tipoDirector; 
         echo "<br>";
@@ -236,7 +241,7 @@ $cct=$_SESSION['cct'];
         echo "<br>";
         echo $cve_estado;
         echo "<br>";
-        echo $flag_upddir;
+        echo $flag_upddir; */
 
         //aplicar validaicones server side
         require_once '../php/funciones_php.php';
@@ -380,9 +385,46 @@ $cct=$_SESSION['cct'];
                 );
                 $metodos_director=new director_dal;
                 if ($metodos_director->updateDirectorNoCURP($obj_director)=="1"){
-                    echo "sweealert ok";
+                    //Correcto
+                    echo " <script>     
+                    swal.fire({ 
+                        icon: 'success',
+                        title: 'DATOS CORRECTOS',
+                        text: '¡Los datos del director fueron cambiados con exito!',
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                         //redirect
+                         window.location.href = '../directores_cambios.php';
+                        } else {
+                          swal.fire('Operacion cancelada !!');
+                        }
+                      });      
+                    </script> ";
+
+
                 }else{
-                    echo "algo salio mal";
+                   // echo "algo salio mal";
+                   echo " <script>     
+                   swal.fire({ 
+                    icon: 'error',
+                    title: 'Error',
+                    text: '¡Error desconocido, vuelva a intentarlo mas tarde!',
+                       buttons: true,
+                       dangerMode: true,
+                     })
+                     .then((willDelete) => {
+                       if (willDelete) {
+                        //redirect
+                        window.location.href = '../directores_cambios.php';
+                       } else {
+                         swal.fire('Operacion cancelada !!');
+                       }
+                     });      
+                   </script> ";
+
                     return;
                 }
                 
@@ -418,16 +460,71 @@ $cct=$_SESSION['cct'];
                 $metodos_director=new director_dal;
                 if ($metodos_director->updateDiretorCompleto($obj_director)=="1")
                 {
-                    echo "sweealert ok";
+                    //echo "sweealert ok";
+                    
+                    echo " <script>     
+                    swal.fire({ 
+                        icon: 'success',
+                        title: 'DATOS CORRECTOS',
+                        text: '¡El cambio de director se realizo con exito!',
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                         //redirect
+                         window.location.href = '../directores_cambios.php';
+                        } else {
+                          swal.fire('Operacion cancelada !!');
+                        }
+                      });      
+                    </script> ";
+
+                            
                 }
                 else
                 {
-                    echo "algo salio mal";
+                    //echo "algo salio mal";
+                    echo " <script>     
+                   swal.fire({ 
+                    icon: 'error',
+                    title: 'Error',
+                    text: '¡Error desconocido, vuelva a intentarlo mas tarde!',
+                       buttons: true,
+                       dangerMode: true,
+                     })
+                     .then((willDelete) => {
+                       if (willDelete) {
+                        //redirect
+                        window.location.href = '../directores_cambios.php';
+                       } else {
+                         swal.fire('Operacion cancelada !!');
+                       }
+                     });      
+                   </script> ";
                     return;
                 }
             }
             else{
-                echo "La bandera llegó con valor desconocido";
+                //echo "La bandera llegó con valor desconocido";
+
+                    echo " <script>     
+                    swal.fire({ 
+                     icon: 'error',
+                     title: 'Error',
+                     text: '¡Error desconocido, vuelva a intentarlo mas tarde, cierre su navegador e inicie sesion nuevamente!',
+                        buttons: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                         //redirect
+                         window.location.href = '../directores_cambios.php';
+                        } else {
+                          swal.fire('Operacion cancelada !!');
+                        }
+                      });      
+                    </script> ";    
                 return;
             }
 
@@ -445,6 +542,6 @@ $cct=$_SESSION['cct'];
 
  }//end post
 ?>
-<?php include_once "../inclusiones/js_incluidos.php"; ?>
+
 </body>
 </html>

@@ -59,7 +59,7 @@
         $("#boton_buscar_centro").click(function(){
             
             let clave=$("#clave").val().trim();
-            //alert("pueba");
+            //alert("pueba");   
             if (clave.length == 0){
                 //alert("La clave de CCT no puede ir vacía");
                 Swal.fire({
@@ -115,6 +115,16 @@
                 });
             }
         });
+
+        $("#clave").bind('keypress', function(event) {
+            var regex = new RegExp("^[0-9a-zA-Z\u00f1\u00d1]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
     });//end ready document
 </script>
 </body>
