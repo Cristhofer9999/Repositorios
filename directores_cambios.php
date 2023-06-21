@@ -392,9 +392,9 @@
 
                                     <!--Boton de Actualizar-->
                                 <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3"> 
-                                        <input id="btnEnviar" class="btn btn-warning" type="submit" value="Actualizar">
+                                        <button id="btnEnviar" class="btn btn-warning" type="submit" > Actualizar</button>
                                         <!--Boton de Cancelar-->
-                                        <button  type="reset"  class="btn btn-secondary" >Cancelar</button>
+                                        <button  type="button" id="btnCancelar" class="btn btn-secondary" >Cancelar</button>
                                 </div>
 
                                                             <?php 
@@ -652,7 +652,9 @@ $(document).ready(function(){
         $('#flag_upddir').val("1");
     }); //end function #cambiar_curp
 
-    
+    $('#btnCancelar').click(function() {
+    location.reload();
+    });
    
 
 });//end ready document
