@@ -4,19 +4,24 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>-->
 
-  <script
+  <!-- <script
   src="https://code.jquery.com/jquery-1.12.4.min.js"
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
-<?php 
+  crossorigin="anonymous"></script> -->
+  
+  <?php 
 session_start();
-$cct=$_SESSION["usuario"];
-include ("../../../class/class_c_tipo_director_dal.php");
+// $cct=$_SESSION["usuario"];
+// $cct=$_SESSION['cct'];
+$cct = '05PES0262A';
+include_once "inclusiones/js_incluidos.php"; 
+
+include ("modelo/class_c_tipo_director_dal.php");
 $tipo_director=new tipo_director_dal();
-include("../../../class/class_c_centro_educativo_dal.php");
+include("modelo/class_c_centro_educativo_dal.php");
 $centro_educativo=new centro_educativo_dal();
 $resultado=$centro_educativo->list_by_centro($cct);
-include ('../../../class/class_c_estados_dal.php');
+include ('modelo/class_c_estados_dal.php');
 $estados = new estados_dal;
 ?>
 <div class="row">
