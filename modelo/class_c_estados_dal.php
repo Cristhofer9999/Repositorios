@@ -1,7 +1,9 @@
 <?php
 include("class_c_estados.php");
-include("class_db2.php");
-class estados_dal extends class_db2{
+// include("class_db2.php");
+include("class_db.php");
+// class estados_dal extends class_db2{
+class estados_dal extends class_db{
 	
   function __construct()
   {
