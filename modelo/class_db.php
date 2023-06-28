@@ -9,6 +9,7 @@ if (class_exists("class_db")!=true){
 		var $db_conn;
 		var $db_name;
 		var $db_query;
+		protected $rows=array();
 
 		function __construct(){
 			//$this->set_db("172.21.255.252:3306" , "root" , "root" ,"centros_educativos");
@@ -32,9 +33,7 @@ if (class_exists("class_db")!=true){
 				    exit;
 				}
 				else{
-					
 					//echo "Si se conecto ";
-
 				}
 
 			}
@@ -46,9 +45,19 @@ if (class_exists("class_db")!=true){
 			}
 		}
 
-
 		function set_sql($sql){
 			$this->db_query=$sql;
+		}
+
+		protected function get_results_from_query(){
+			if($this->rows!=null)
+			{
+			  unset($this->rows);
+			}
+			$result=$this->db_conn->query($this->query);
+			while ($this->rows[] = $result->fetch_assoc());
+			$result->close();
+			array_pop($this->rows);
 		}
 
 	}//end class

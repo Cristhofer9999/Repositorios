@@ -258,33 +258,19 @@ public function count_coinsidencia_cct($servicio_cct,$substrcct)
     */
    //elda
     public function list_by_centro($cct) {
-      // $this->query="SELECT * ,w.*,x.correo_electronico_institucional as institucional, v.nombre AS nombre_centro,v.codigo_postal AS cp
-      // FROM vista_cct v 
-      // LEFT JOIN dato_centro_educativo w on (w.cve_centro=v.cct)
-      // LEFT JOIN recursos_c_a_inicio_2018 r ON (v.cct=r.CV_CCT)
-      // LEFT JOIN inmueble_centro_educativo f ON (f.cve_centro=v.cct)
-      // LEFT JOIN director x on (v.cct=x.cve_centro)
-      // WHERE cct='$cct'
-      // LIMIT 1";
+      $this->query="SELECT * ,w.*,x.correo_electronico_institucional as institucional, v.nombre AS nombre_centro,v.codigo_postal AS cp
+      FROM vista_cct v 
+      LEFT JOIN dato_centro_educativo w on (w.cve_centro=v.cct)
+      LEFT JOIN recursos_c_a_inicio_2018 r ON (v.cct=r.CV_CCT)
+      LEFT JOIN inmueble_centro_educativo f ON (f.cve_centro=v.cct)
+      LEFT JOIN director x on (v.cct=x.cve_centro)
+      WHERE cct='$cct'
+      LIMIT 1";
 
-      //$this->get_results_from_query();
-
-      /* Modificación */
-      $sql = "SELECT * ,w.*,x.correo_electronico_institucional as institucional, v.nombre AS nombre_centro,v.codigo_postal AS cp ";
-      $sql .= "FROM vista_cct v ";
-      $sql .= "LEFT JOIN dato_centro_educativo w on (w.cve_centro=v.cct) ";
-      $sql .= "LEFT JOIN recursos_c_a_inicio_2018 r ON (v.cct=r.CV_CCT) ";
-      $sql .= "LEFT JOIN inmueble_centro_educativo f ON (f.cve_centro=v.cct)";
-      $sql .= "LEFT JOIN director x on (v.cct=x.cve_centro) ";
-      $sql .= "WHERE cct='$cct' ";
-      $sql .= "LIMIT 1";
-
-      $datosArray = (array)$this->set_sql($sql);
-
+      $this->get_results_from_query();
       $i=1;
       $lista=NULL;
-      // foreach ($this->rows as $key => $value) {
-      foreach ($datosArray as $key => $value) {  
+      foreach ($this->rows as $key => $value) {
         $obj = new centro_educativo;
         $obj->cve_inmueble_sic=$value["cve_inmueble_sic"];
         //$obj->INMUEBLE_CV_INMUEBLE=$value["INMUEBLE_CV_INMUEBLE"];
