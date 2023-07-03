@@ -28,12 +28,12 @@ if ($_POST) {
 
 
 
-	include("../../../class/class_c_centro_educativo_dal.php");
-	include("../../../class/class_c_migracion_dependencia_dal.php");
+	include("../modelo/class_c_centro_educativo_dal.php");
+	include("../modelo/class_c_migracion_dependencia_dal.php");
 
-	include("../../../class/class_c_migracion_sostenimiento_dal.php");
+	include("../modelo/class_c_migracion_sostenimiento_dal.php");
 
-	include("../../../class/class_c_incorporacion_dal.php");
+	include("../modelo/class_c_incorporacion_dal.php");
 
 	$centro_educativo=new centro_educativo_dal();
 	$resultado=$centro_educativo->list_by_centro($cct);

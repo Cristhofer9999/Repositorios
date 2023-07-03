@@ -33,7 +33,9 @@ if (class_exists("class_db")!=true){
 				    exit;
 				}
 				else{
+					
 					//echo "Si se conecto ";
+
 				}
 
 			}
@@ -45,11 +47,13 @@ if (class_exists("class_db")!=true){
 			}
 		}
 
+
 		function set_sql($sql){
 			$this->db_query=$sql;
 		}
 
-		protected function get_results_from_query(){
+		protected function get_results_from_query()
+		{
 			if($this->rows!=null)
 			{
 			  unset($this->rows);
@@ -60,6 +64,23 @@ if (class_exists("class_db")!=true){
 			array_pop($this->rows);
 		}
 
+		protected function realescapestring($str=null)
+		{
+			$result=$this->db_conn->real_escape_string($str);
+			return $result;
+		}
+		
+		protected function execute_single_query() 
+		{
+			$this->db_conn->query($this->query);
+		if ($this->db_conn->affected_rows==1) {
+		  echo $insertado=1;
+		} else
+		{
+		  echo $insertado=0;
+		}
+		return $insertado;
+		}
 	}//end class
 }//evitar la redefinicion de clase
 ?>

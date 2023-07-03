@@ -14,8 +14,8 @@ session_start();
 // $cct=$_SESSION["usuario"];
 // $cct=$_SESSION['cct'];
 $cct = '05PES0262A';
-include_once "inclusiones/js_incluidos.php"; 
 
+include_once "inclusiones/js_incluidos.php"; 
 include ("modelo/class_c_tipo_director_dal.php");
 $tipo_director=new tipo_director_dal();
 include("modelo/class_c_centro_educativo_dal.php");
@@ -328,11 +328,11 @@ $estados = new estados_dal;
                 <script>
 
 $("#btn-update").click(function(event) {
-    alert('tito');
+    alert('La informacion en SIC ha sido actualizada');
     
       
             $.ajax({
-                url: 'http://localhost/centros_educativos/centros/_actions/administra/w_service_test2.php',
+                url: "actions/w_service_sic.php",
                 type: 'POST',
                 dataType: 'HTML',
                 data: { mov: '4',
