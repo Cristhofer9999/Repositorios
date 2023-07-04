@@ -1,31 +1,309 @@
 <?php 
 header('Content-Type: text/html;'); 
 if ($_POST) {
-	#Alta 1 Clausura 2 Reapertura 3 Cambio 4
-	$status=$_POST["mov"];
-	$cct=$_POST["cct"];
+				// #Alta 1 Clausura 2 Reapertura 3 Cambio 4
+				// $status=$_POST["mov"];
+				// $cct=$_POST["cct"];
 
 
-   	$tipdir=$_POST["tipdir"];
-    $rfc=$_POST["rfc"];
-    $curp=$_POST["curp"];
-    $nomdirec=$_POST["nomdirec"];
-    $apaterno=$_POST["apaterno"];
-    $amaterno=$_POST["amaterno"];
-    $fechnac=$_POST["fechnac"];
-    $entnacalumn=$_POST["entnacalumn"];
-    $pais=9;
-    //pais: $("#pais").val().toUpperCase(),
-    $sexo=$_POST["sexo"];
-    $telofi=$_POST["telofi"];
-    $telpart=$_POST["telpart"];
-    $telcel=$_POST["telcel"];
-    $emailpers=$_POST["emailpers"];
-    $emailinstitucional=$_POST["emailinstitucional"];
+				// $tipdir=$_POST["tipdir"];
+				// $rfc=$_POST["rfc"];
+				// $curp=$_POST["curp"];
+				// $nomdirec=$_POST["nomdirec"];
+				// $apaterno=$_POST["apaterno"];
+				// $amaterno=$_POST["amaterno"];
+				// $fechnac=$_POST["fechnac"];
+				// $entnacalumn=$_POST["entnacalumn"];
+				// $pais=9;
+				// //pais: $("#pais").val().toUpperCase(),
+				// $sexo=$_POST["sexo"];
+				// $telofi=$_POST["telofi"];
+				// $telpart=$_POST["telpart"];
+				// $telcel=$_POST["telcel"];
+				// $emailpers=$_POST["emailpers"];
+				// $emailinstitucional=$_POST["emailinstitucional"];
 
 
-	//echo $status.' - '.$cct.'-'.$rfc;exit;
+				// //echo $status.' - '.$cct.'-'.$rfc;exit;
 
+	$status='4';
+
+	// $cct=$_POST["cct"];
+	if (isset($_POST['cen'])){
+		$cct=strtoupper($_POST['cen']);
+	}
+	else{
+		$cct=null;
+		echo 'NO RECIBI DATO DE CCT';
+		return;
+	}
+	// $tipdir=$_POST["tipdir"];
+	if (isset($_POST['tipdir'])){
+		$tipdir=strtoupper($_POST['tipdir']);
+	}
+	else{
+		$tipdir=null;
+		echo 'NO RECIBI DATO DE TIPO DE DIRECTOR';
+		return;
+	}
+	
+	// $rfc=$_POST["rfc"];
+	if (isset($_POST['rfc'])){
+        $rfc=strtoupper($_POST['rfc']);
+    }
+    else{
+        $rfc=null;
+        echo 'NO RECIBI DATO DE RFC';
+        return;
+    }
+
+	// $curp=$_POST["curp"];
+	if (isset($_POST['curp'])){
+        $curp=strtoupper($_POST['curp']);
+    }
+    else{
+        $curp=null;
+        echo 'NO RECIBI DATO DE CURP';
+        return;
+    }
+	
+	// $nomdirec=$_POST["nomdirec"];
+	if (isset($_POST['nomdirec'])){
+        $nomdirec=strtoupper($_POST['nomdirec']);
+    }
+    else{
+        $nomdirec=null;
+        echo 'NO RECIBI DATO DE NOMBRE DIRECTOR';
+        return;
+    }
+
+	// $apaterno=$_POST["apaterno"];
+	if (isset($_POST['apaterno'])){
+        $apaterno=strtoupper($_POST['apaterno']);
+    }
+    else{
+        $apaterno=null;
+        echo 'NO RECIBI DATO DE APELLIDO PATERNO';
+        return;
+    }
+
+	// $amaterno=$_POST["amaterno"];
+	if (isset($_POST['amaterno'])){
+        $amaterno=strtoupper($_POST['amaterno']);
+    }
+    else{
+        $amaterno=null;
+        echo 'NO RECIBI DATO DE APELLIDO MATERNO';
+        return;
+    }
+
+	// $fechnac=$_POST["fechnac"];
+	if (isset($_POST['fechnac'])){
+        $fechnac=strtoupper($_POST['fechnac']);
+    }
+    else{
+        $fechnac=null;
+        echo 'NO RECIBI DATO DE FECHA NACIMIENTO';
+        return;
+    }
+
+	// $entnacalumn=$_POST["entnacalumn"];
+	if (isset($_POST['entnacalumn'])){
+        $entnacalumn=strtoupper($_POST['entnacalumn']);
+    }
+    else{
+        $entnacalumn=null;
+        echo 'NO RECIBI DATO DE ENTIDAD DE NACIMEINTO';
+        return;
+    }
+
+	$pais=9;
+				// //pais: $("#pais").val().toUpperCase(),
+
+	// $sexo=$_POST["sexo"];
+	if (isset($_POST['sexo'])){
+        $sexo=strtoupper($_POST['sexo']);
+    }
+    else{
+        $sexo=null;
+        echo 'NO RECIBI DATO DE SEXO';
+        return;
+    }
+
+	// $telofi=$_POST["telofi"];
+	if (isset($_POST['telofi'])){
+        $telofi=strtoupper($_POST['telofi']);
+    }
+    else{
+        $telofi=null;
+        echo 'NO RECIBI DATO DE TELEFONO DE OFICINA';
+        return;
+    }
+	
+	// $telpart=$_POST["telpart"];
+	if (isset($_POST['telpart'])){
+        $telpart=strtoupper($_POST['telpart']);
+    }
+    else{
+        $telpart=null;
+        echo 'NO RECIBI DATO DE TELEFONO PARTICULAR';
+        return;
+    }
+
+	// $telcel=$_POST["telcel"];
+	if (isset($_POST['telcel'])){
+        $telcel=strtoupper($_POST['telcel']);
+    }
+    else{
+        $telcel=null;
+        echo 'NO RECIBI DATO DE CELULAR';
+        return;
+    }
+
+	// $emailpers=$_POST["emailpers"];
+	if (isset($_POST['emailpers'])){
+        $emailpers=strtoupper($_POST['emailpers']);
+    }
+    else{
+        $emailpers=null;
+        echo 'NO RECIBI DATO DE CORREO PERSONAL';
+        return;
+    }
+
+	// $emailinstitucional=$_POST["emailinstitucional"];
+	if (isset($_POST['emailinstitucional'])){
+        $emailinstitucional=strtoupper($_POST['emailinstitucional']);
+    }
+    else{
+        $emailinstitucional=null;
+        echo 'NO RECIBI DATO DE CORREO INSTITUCIONAL';
+        return;
+    }
+
+	//
+	echo $status; 
+	echo "<br>";
+	echo $cct;
+	echo "<br>";
+	echo $tipdir ;
+	echo "<br>";
+	echo $rfc ;
+	echo "<br>";
+	echo $curp;
+	echo "<br>";
+	echo $nomdirec;
+	echo "<br>";
+	echo $apaterno;
+	echo "<br>";
+	echo $amaterno;
+	echo "<br>";
+	echo $fechnac;
+	echo "<br>";
+	echo $entnacalumn;
+	echo "<br>";
+	echo $pais;
+	echo "<br>";
+	echo $sexo;
+	echo "<br>";
+	echo $telofi;
+	echo "<br>";
+	echo $telpart;
+	echo "<br>";
+	echo $telcel;
+	echo "<br>";
+	echo $emailpers;
+	echo "<br>";
+	echo $emailinstitucional;
+
+	//aplicar validaicones server side
+	require_once '../php/funciones_php.php';
+	$errores=array();
+
+	// statsus
+	if (!validaRequerido($status)){
+		$errores[]='El campo status llegó vacio';
+	}
+
+	// cct;
+	if (!validaRequerido($cct)){
+		$errores[]='El campo cct llegó vacio';
+	}
+
+	// tipdir
+	if (!validaRequerido($tipdir)){
+		$errores[]='El campo tipo director llegó vacio';
+	}
+
+	// rfc
+	if (!validaRequerido($rfc)){
+		$errores[]='El campo rfc llegó vacio';
+	}
+
+	// curp;
+	if (!validaRequerido($curp)){
+		$errores[]='El campo curp llegó vacio';
+	}
+
+	// nomdirec
+	if (!validaRequerido($nomdirec)){
+		$errores[]='El campo nombre director llegó vacio';
+	}
+	
+	// apaterno
+	if (!validaRequerido($apaterno)){
+		$errores[]='El campo apellido paterno llegó vacio';
+	}
+
+	// amaterno
+	if (!validaRequerido($apaterno)){
+		$errores[]='El campo apellido paterno llegó vacio';
+	}
+
+	// fechnac
+	if (!validaRequerido($fechnac)){
+		$errores[]='El campo fecha nacimiento llegó vacio';
+	}
+	
+	// entnacalumn
+	if (!validaRequerido($entnacalumn)){
+		$errores[]='El campo entidad nacimiento llegó vacio';
+	}
+	
+	
+	// pais
+	if (!validaRequerido($pais)){
+		$errores[]='El campo pais llegó vacio';
+	}
+
+	// sexo
+	if (!validaRequerido($sexo)){
+		$errores[]='El campo sexo llegó vacio';
+	}
+
+	// telofi
+	if (!validaRequerido($telofi)){
+		$errores[]='El campo telefono oficina llegó vacio';
+	}
+
+	// telpart
+	if (!validaRequerido($telpart)){
+		$errores[]='El campo telefono particular llegó vacio';
+	}
+	
+	// telcel
+	if (!validaRequerido($telcel)){
+		$errores[]='El campo telefono celular llegó vacio';
+	}
+	
+	// emailpers
+	if (!validaRequerido($emailpers)){
+		$errores[]='El campo email personal llegó vacio';
+	}
+
+	// $emailinstitucional
+	if (!validaRequerido($pais)){
+		$errores[]='El campo pais llegó vacio';
+	}
 
 
 	include("../modelo/class_c_centro_educativo_dal.php");
@@ -211,7 +489,7 @@ if ($_POST) {
 						'Email'            => $Email,
 						'PaginaWeb'        => "",
 						'Extension'        => "",
-						'CveTipoDirector'  => $tipdir
+						'Cvenomdirec'  => $tipdir
 					)
 				);
 
@@ -1334,13 +1612,19 @@ if ($_POST) {
 
 					if ($resultado->Errores->string[0]==$cct) {
 						$centro_educativo->valida_web_service($cct, '0');
-						print 'resultado';
+						print ' resultado';
+						echo '<br>';
+						echo'<pre>';
 						print_r($resultado);
+						echo'</pre>';
 					} else
 					{
 						$centro_educativo->valida_web_service($cct, $status);
-						print "resultado";
+						print " resultado";
+						echo '<br>';
+						echo'<pre>';
 						print_r($resultado);
+						echo'</pre>';
 					}
 				}
 				catch (Exception $e)
