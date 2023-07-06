@@ -1,31 +1,35 @@
 <?php 
 header('Content-Type: text/html;'); 
 if ($_POST) {
-				// #Alta 1 Clausura 2 Reapertura 3 Cambio 4
-				// $status=$_POST["mov"];
-				// $cct=$_POST["cct"];
+
+	/*
+	// #Alta 1 Clausura 2 Reapertura 3 Cambio 4
+	$status=$_POST["mov"];
+	$cct=$_POST["cct"];
 
 
-				// $tipdir=$_POST["tipdir"];
-				// $rfc=$_POST["rfc"];
-				// $curp=$_POST["curp"];
-				// $nomdirec=$_POST["nomdirec"];
-				// $apaterno=$_POST["apaterno"];
-				// $amaterno=$_POST["amaterno"];
-				// $fechnac=$_POST["fechnac"];
-				// $entnacalumn=$_POST["entnacalumn"];
-				// $pais=9;
-				// //pais: $("#pais").val().toUpperCase(),
-				// $sexo=$_POST["sexo"];
-				// $telofi=$_POST["telofi"];
-				// $telpart=$_POST["telpart"];
-				// $telcel=$_POST["telcel"];
-				// $emailpers=$_POST["emailpers"];
-				// $emailinstitucional=$_POST["emailinstitucional"];
+	$tipdir=$_POST["tipdir"];
+	$rfc=$_POST["rfc"];
+	$curp=$_POST["curp"];
+	$nomdirec=$_POST["nomdirec"];
+	$apaterno=$_POST["apaterno"];
+	$amaterno=$_POST["amaterno"];
+	$fechnac=$_POST["fechnac"];
+	$entnacalumn=$_POST["entnacalumn"];
+	$pais=9;
+	//pais: $("#pais").val().toUpperCase(),
+	$sexo=$_POST["sexo"];
+	$telofi=$_POST["telofi"];
+	$telpart=$_POST["telpart"];
+	$telcel=$_POST["telcel"];
+	$emailpers=$_POST["emailpers"];
+	$emailinstitucional=$_POST["emailinstitucional"];
+
+	//echo $status.' - '.$cct.'-'.$rfc;exit;
+	*/
 
 
-				// //echo $status.' - '.$cct.'-'.$rfc;exit;
-
+	
 	$status='4';
 
 	// $cct=$_POST["cct"];
@@ -303,8 +307,8 @@ if ($_POST) {
 	// $emailinstitucional
 	if (!validaRequerido($pais)){
 		$errores[]='El campo pais llegó vacio';
-	}
-
+	} 
+	
 
 	include("../modelo/class_c_centro_educativo_dal.php");
 	include("../modelo/class_c_migracion_dependencia_dal.php");
@@ -315,9 +319,6 @@ if ($_POST) {
 
 	$centro_educativo=new centro_educativo_dal();
 	$resultado=$centro_educativo->list_by_centro($cct);
-
-	
-	
 	
 	
 	
@@ -489,7 +490,7 @@ if ($_POST) {
 						'Email'            => $Email,
 						'PaginaWeb'        => "",
 						'Extension'        => "",
-						'Cvenomdirec'  => $tipdir
+						'CveTipoDirector'  => $tipdir
 					)
 				);
 
@@ -1603,9 +1604,9 @@ if ($_POST) {
 				try
 				{
 					
-						echo '<pre>';
+						echo '<br> <pre>';
 						print_r($parametrosEsc);
-						echo '</pre>';
+						echo '</pre> <br>';
 					$resultado = $client->CambioCentroTrabajo(array('CT' => $paramct, 'escuelaWS' => $parametrosEsc));  
 
 
@@ -1613,18 +1614,16 @@ if ($_POST) {
 					if ($resultado->Errores->string[0]==$cct) {
 						$centro_educativo->valida_web_service($cct, '0');
 						print ' resultado';
-						echo '<br>';
-						echo'<pre>';
+						echo '<br> <pre>';
 						print_r($resultado);
-						echo'</pre>';
+						echo '</pre> <br>';
 					} else
 					{
 						$centro_educativo->valida_web_service($cct, $status);
+						echo '<br> <pre>';
 						print " resultado";
-						echo '<br>';
-						echo'<pre>';
 						print_r($resultado);
-						echo'</pre>';
+						echo '</pre> <br>';
 					}
 				}
 				catch (Exception $e)

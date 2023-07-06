@@ -51,6 +51,7 @@ $estados = new estados_dal;
                         <?php if ($resultado): ?>
                             <?php foreach ($resultado as $key => $value): ?>
 
+                                <!-- <form class="form-horizontal" id="form_update"> -->
                                 <form id="form_update" method="post" action="actions/w_service_sic.php" class="form-horizontal">
                                     <div class="form-body">
                                         <div class="row">
@@ -163,7 +164,7 @@ $estados = new estados_dal;
                                                                 <label class="control-label col-md-4">Fecha Nacimiento</label>
                                                                 <div class="col-md-8">
                                                                     <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-                                                                        <input type="text" class="form-control" id="fechnac" name="fechnac" placeholder="Seleccione Fecha de Nacimiento" value="<?=$value->fecha_nacimiento;?>" >
+                                                                    <input type="text" class="form-control" id="fechnac" name="fechnac" placeholder="Seleccione Fecha de Nacimiento" value="<?=$value->fecha_nacimiento;?>">
                                                                         <span class="input-group-btn">
                                                                             <button class="btn default" type="button" disabled><i class="fa fa-calendar"></i></button>
                                                                         </span>
@@ -177,7 +178,7 @@ $estados = new estados_dal;
                                                                 <input type="hidden" id="pais" name="pais" value="<?=$value->cve_pais?>">
                                                                 <label class="control-label col-md-4" for="entnacalumn">Entidad de Nacimiento</label>
                                                                 <div class="col-md-8">
-                                                                    <select class="form-control" name="entnacalumn" id="entnacalumn" data-placeholder="Seleccione la Entidad de Nacimiento" >
+                                                                    <select class="form-control" name="entnacalumn" id="entnacalumn" data-placeholder="Seleccione la Entidad de Nacimiento">
                                                                         <option></option>
                                                                         <?php foreach ($estados->mostrar_las_opciones_por_pais('9') as $key => $value3): ?>
                                                                             <?php if ($value->cve_estado==$value3->getCve_estado()): ?>
@@ -199,7 +200,7 @@ $estados = new estados_dal;
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-4">Sexo</label>
                                                                 <div class="col-md-8">
-                                                                    <select class="form-control" id="sexo" name="sexo" data-placeholder="Seleccione el Sexo" >
+                                                                    <select class="form-control" id="sexo" name="sexo" data-placeholder="Seleccione el Sexo">
                                                                         <option value=""></option>
                                                                         <?php if ($value->sexo=="M"): ?>
                                                                             <option value="M" selected>MUJER</option>
